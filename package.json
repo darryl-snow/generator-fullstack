@@ -5,6 +5,7 @@
 		"express": "~3.4.3",
 		"mongoose": "~3.5.5",
 		"async": "~0.2.9",
+		"coffee-script": "latest",
 		"jade": "latest"
 	},
 	"devDependencies": {
