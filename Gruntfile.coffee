@@ -28,14 +28,15 @@ module.exports = (grunt) ->
 		express:
 			options:
 				port: process.env.PORT or 9000
+				cmd: "coffee"
 
 			dev:
 				options:
-					script: "server.js"
+					script: "server.coffee"
 
 			prod:
 				options:
-					script: "server.js"
+					script: "server.coffee"
 					node_env: "production"
 
 		open:
@@ -51,13 +52,17 @@ module.exports = (grunt) ->
 				files: ["test/spec/{,*/}*.{coffee,litcoffee,coffee.md}"]
 				tasks: ["newer:coffee:test", "karma"]
 
+			stylus:
+				files: ["<%= yeoman.app %>/styles/{,*/}*.styl"]
+				tasks: ["stylus:server"]
+
 			livereload:
 				files: ["<%= yeoman.app %>/<%= yeoman.views %>/{,*//*}*.{html,jade}", "{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css", "{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js", "<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}"]
 				options:
 					livereload: true
 
 			express:
-				files: ["server.js", "server/{,*//*}*.{js,json}"]
+				files: ["server.coffee", "server/{,*//*}*.{coffee,json}"]
 				tasks: ["express:dev"]
 				options:
 					livereload: true
@@ -124,6 +129,18 @@ module.exports = (grunt) ->
 					src: "{,*/}*.coffee"
 					dest: ".tmp/scripts"
 					ext: ".js"
+				,
+					expand: true
+					cwd: "server"
+					src: "{,*/}*.coffee"
+					dest: ".tmp/server"
+					ext: ".js"
+				,
+					expand: true
+					cwd: "./"
+					src: "server.coffee"
+					dest: ".tmp"
+					ext: ".js"
 				]
 
 			test:
@@ -134,6 +151,25 @@ module.exports = (grunt) ->
 					dest: ".tmp/spec"
 					ext: ".js"
 				]
+
+		# Compiles Stylus to CSS
+		stylus:
+			options:
+				use: [require("axis-css")]
+
+			dist:
+				expand: true
+				cwd: "<%= yeoman.app %>/styles"
+				src: "{,*/}*.styl"
+				dest: ".tmp/styles"
+				ext: ".css"
+
+			server:
+				expand: true
+				cwd: "<%= yeoman.app %>/styles"
+				src: "{,*/}*.styl"
+				dest: ".tmp/styles"
+				ext: ".css"
 
 		
 		# Renames files for browser caching purposes
@@ -147,14 +183,14 @@ module.exports = (grunt) ->
 		# concat, minify and revision files. Creates configurations in memory so
 		# additional tasks can operate on them
 		useminPrepare:
-			html: ["<%= yeoman.app %>/<%= yeoman.views %>/index.html", "<%= yeoman.app %>/<%= yeoman.views %>/index.jade"]
+			html: ["<%= yeoman.app %>/<%= yeoman.views %>/index.html", "<%= yeoman.app %>/<%= yeoman.views %>/index.jade", "styleguide/**/{,*/}*.html"]
 			options:
 				dest: "<%= yeoman.dist %>"
 
 		
 		# Performs rewrites based on rev and the useminPrepare configuration
 		usemin:
-			html: ["<%= yeoman.views %>/{,*/}*.html", "<%= yeoman.views %>/{,*/}*.jade"]
+			html: ["<%= yeoman.views %>/{,*/}*.html", "<%= yeoman.views %>/{,*/}*.jade", "styleguide/**/{,*/}*.html"]
 			css: ["<%= yeoman.dist %>/styles/{,*/}*.css"]
 			options:
 				assetsDirs: ["<%= yeoman.dist %>"]
@@ -216,6 +252,17 @@ module.exports = (grunt) ->
 			dist:
 				html: ["<%= yeoman.views %>/*.html"]
 
+
+		# Generate the styleguide
+		kss:
+			files:
+				src: "<%= yeoman.app %>/styles"
+				dest: "styleguide"
+
+			options:
+				preprocessor: "stylus"
+				template: "<%= yeoman.app %>/styleguide-template"
+
 		
 		# Copies remaining files to places other tasks can use
 		copy:
@@ -237,6 +284,10 @@ module.exports = (grunt) ->
 					cwd: ".tmp/images"
 					dest: "<%= yeoman.dist %>/images"
 					src: ["generated/*"]
+				,
+					expand: true
+					dest: "<%= yeoman.dist %>"
+					src: ["styleguide/**/*"]
 				]
 
 			heroku:
@@ -248,7 +299,21 @@ module.exports = (grunt) ->
 				,
 					expand: true
 					dest: "heroku"
-					src: ["package.json", "server.js", "server/**/*"]
+					src: ["package.json"]
+				,
+					expand: true
+					cwd: ".tmp"
+					dest: "heroku"
+					src: ["server/**/*.js"]
+				,
+					expand: true
+					cwd: ".tmp"
+					dest: "heroku"
+					src: ["server.js"]
+				,
+					expand: true
+					dest: "heroku/public"
+					src: ["styleguide/**/*"]
 				]
 
 			styles:
@@ -260,9 +325,9 @@ module.exports = (grunt) ->
 		
 		# Run some tasks in parallel to speed up the build process
 		concurrent:
-			server: ["coffee:dist", "copy:styles"]
-			test: ["coffee", "copy:styles"]
-			dist: ["coffee", "copy:styles", "imagemin", "svgmin", "htmlmin"]
+			server: ["coffee:dist", "stylus:server", "copy:styles"]
+			test: ["coffee", "stylus", "copy:styles"]
+			dist: ["coffee", "stylus:dist", "copy:styles", "imagemin", "svgmin", "htmlmin"]
 		
 		# Test settings
 		karma:
@@ -275,13 +340,13 @@ module.exports = (grunt) ->
 
 	grunt.registerTask "serve", (target) ->
 		return grunt.task.run(["build", "express:prod", "open", "express-keepalive"]) if target is "dist"
-		grunt.task.run ["clean:server", "concurrent:server", "autoprefixer", "express:dev", "open", "watch"]
+		grunt.task.run ["clean:server", "concurrent:server", "autoprefixer", "express:dev", "kss", "open", "watch"]
 
 	grunt.registerTask "server", ->
 		grunt.log.warn "The `server` task has been deprecated. Use `grunt serve` to start a server."
 		grunt.task.run ["serve"]
 
 	grunt.registerTask "test", ["clean:server", "concurrent:test", "autoprefixer", "karma"]
-	grunt.registerTask "build", ["clean:dist", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin"]
+	grunt.registerTask "build", ["clean:dist", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "kss", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin"]
 	grunt.registerTask "heroku", ["build", "clean:heroku", "copy:heroku"]
 	grunt.registerTask "default", ["newer:jshint", "test", "build"]

@@ -4,6 +4,7 @@
 express = require("express")
 path = require("path")
 fs = require("fs")
+passport = require("passport")
 app = express()
 
 # Connect to database
@@ -15,7 +16,7 @@ fs.readdirSync(modelsPath).forEach (file) ->
 	require modelsPath + "/" + file
 
 # Populate empty DB with dummy data
-require "./server/db/dummydata"
+require "./server/dummydata"
 
 # Express Configuration
 app.configure "development", ->
@@ -39,16 +40,8 @@ app.configure ->
 	# Router needs to be last
 	app.use app.router
 
-# Controllers
-api = require("./server/controllers/api")
-controllers = require("./server/controllers")
-
-# Server Routes
-app.get "/api/awesomeThings", api.awesomeThings
-
-# Angular Routes
-app.get "/partials/*", controllers.partials
-app.get "/*", controllers.index
+# Routes
+routes = require("./server/routes") app, passport
 
 # Start server
 port = process.env.PORT or 3000

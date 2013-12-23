@@ -1,0 +1,39 @@
+// Blocks
+// 
+// Styles for block-level elements
+//
+// .class - description
+//
+// Markup:
+// <div class="{$modifiers}"></div>
+//
+// Styleguide 2.1
+
+
+// .header
+// .hero
+// .footer
+// etc.
+
+.hero
+	background 					blue
+	box-sizing 					border-box
+	color 						white
+	padding 					2em
+
+	h1
+		font-size 				2.5em
+		margin-bottom 			0
+
+		@media (min-width: 600px)
+			font-size 			4em
+
+.panel
+	background 					white
+	box-shadow 					0 1px 2px rgba(black,0.1)
+	box-sizing 					border-box
+	display 					inline-block
+	max-width 					100%
+	padding 					1.5em
+	text-align 					left
+	word-wrap 					break-word

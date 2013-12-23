@@ -1,0 +1,76 @@
+// Navigation
+// 
+// Styles for navigation menus
+//
+// .class - description
+//
+// Markup:
+// <nav class="{modifiers}">
+// 	<ul>
+// 		<li><a href="/">Item 1</a></li>
+// 		<li><a href="/">Item 2</a></li>
+// 		<li><a href="/">Item 3</a></li>
+// 	</ul>
+// </nav>
+//
+// Styleguide 2.6
+
+.navbar
+	background 				white
+	box-shadow				0 1px 2px rgba(black,0.05)
+	box-sizing 				border-box
+	font-size 				0.8em
+	padding 				1em
+	position 				relative
+	width 					100%
+
+	group()
+
+	.menu
+		float 				right
+		line-height 		2em
+
+	ul
+		ul(none)
+		// @extends 			.unstyled-list
+		// @extends 			.inline-list
+		margin 				0
+		padding 			0
+
+		li
+			display 		inline-block
+			margin 			0
+			padding 		0
+
+	a
+		color 				textcolour
+		display 			block
+		padding 			0.5em
+
+		&:active,
+		&:focus,
+		&:hover
+			color 			blue
+
+	.logo
+		margin 				0
+		padding 			0
+
+		img
+			height 			auto
+			width 			2.8em
+
+		&.centred
+			left 			25%
+			margin-left 	-0.5em
+			position 		absolute
+			top 			1.1em
+
+			@media(min-width:600px)
+				left 		50%
+
+	.divider
+		opacity 			0.3
+
+.dropdown-menu
+	display none
