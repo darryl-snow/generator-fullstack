@@ -307,6 +307,10 @@ module.exports = (grunt) ->
 					src: ["server/**/*.js"]
 				,
 					expand: true
+					dest: "heroku"
+					src: ["server/**/*.json"]
+				,
+					expand: true
 					cwd: ".tmp"
 					dest: "heroku"
 					src: ["server.js"]

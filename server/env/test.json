@@ -1,0 +1,12 @@
+{
+	"db": "mongodb://localhost/app-test",
+	"port": 9001,
+	"app": {
+		"name": "App Name"
+	},
+	"github": {
+		"clientID": "3a15d1fc1d1db3ea9ffb",
+		"clientSecret": "541db94923d7547f9702e67f31d58c668ff7a4ed",
+		"callbackURL": "http://localhost:9001/auth/github/callback"
+	}
+}
