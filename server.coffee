@@ -14,7 +14,7 @@ require("./server/express") app
 require("./server/db")
 
 # Authentication
-# require("./server/authentication") passport
+require("./server/authentication") passport
 
 # Routes
 routes = require("./server/routes") app, passport
