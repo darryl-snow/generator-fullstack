@@ -10,8 +10,20 @@ exports.partials = (req, res) ->
 		else
 			res.send html
 
+# Main page
 exports.index = (req, res) ->
+	if req.user
+		res.cookie 'user', JSON.stringify req.user,
+			maxAge: 15552000 #3 months
+			httpOnly: true
+	
 	res.render "index"
+
+# Sign up Page
+exports.signup = (req, res) ->
+	res.render "index",
+		title: "Sign up"
+		user: new User()
 
 exports.styleguide = (req, res) ->
 	url = req.url

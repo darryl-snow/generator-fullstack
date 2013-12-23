@@ -23,4 +23,4 @@ fs.readdirSync(modelsPath).forEach (file) ->
 	require modelsPath + "/" + file
 
 # import dummy data
-require "../dummydata"
+# require "../dummydata"
