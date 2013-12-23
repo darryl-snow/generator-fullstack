@@ -1,6 +1,8 @@
 path = require('path')
 rootPath = path.normalize(__dirname + '/../..')
 
+# TODO: import these from separate json files
+
 # general settings
 module.exports =
 	root: rootPath,

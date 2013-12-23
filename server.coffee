@@ -11,17 +11,10 @@ app = express()
 env = process.env.NODE_ENV = process.env.NODE_ENV or "development"
 config = require("./server/config")
 require("./server/express") app
+require("./server/db")
 
-# Connect to database
-db = require("./server/db/mongo")
-
-# Bootstrap models
-modelsPath = path.join(__dirname, "server/models")
-fs.readdirSync(modelsPath).forEach (file) ->
-	require modelsPath + "/" + file
-
-# Populate empty DB with dummy data
-require "./server/dummydata"
+# Authentication
+# require("./server/authentication") passport
 
 # Routes
 routes = require("./server/routes") app, passport

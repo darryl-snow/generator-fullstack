@@ -8,7 +8,8 @@
 		"jade": "latest",
 		"passport": "latest",
 		"passport-local": "latest",
-		"underscore": "latest"
+		"underscore": "latest",
+		"connect-mongo": "latest"
 	},
 	"devDependencies": {
 		"grunt": "~0.4.1",
