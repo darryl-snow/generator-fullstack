@@ -9,11 +9,15 @@
 //
 // Styleguide 2.2
 
-.button,
-button.button
+button
+.button
 	simple-button(dark-blue)
 	border 					none
-	margin-bottom 			1em
+	cursor 					pointer
 
 	&.large
 		simple-button(dark-blue, 'large')
+
+	&.disabled
+		button-disabled()
+		cursor 				not-allowed

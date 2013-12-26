@@ -1,23 +1,51 @@
-.header
-  ul.nav.nav-pills.pull-right
-    li.active
-      a(ng-href='#') Home
-    li
-      a(ng-href='#') About
-    li
-      a(ng-href='#') Contact
-  h3.text-muted iproferoApp
-.jumbotron
-  h1 'Allo, 'Allo!
-  p.lead
-    <img src="images/yeoman.png" alt="I'm Yeoman">
-    br
-    | Always a pleasure scaffolding your apps.
-  p
-    a.btn.btn-lg.btn-success(ng-href='#') Splendid!
-.row.marketing
-  div(ng-repeat='thing in awesomeThings')
-    h4 {{thing.name}}
-    p {{thing.info}}
-.footer
-  p ♥ from the Yeoman team
+div(data-ng-if="!currentUser")
+	
+	.hero
+		.one.half
+			h1 Organisr.io
+			h2.subtitle a toolkit for keeping things organised
+
+		.one.half
+			form(name='form', data-ng-controller="AuthCtrl", ng-submit='register(form)', novalidate)
+				.form-group(ng-class='{"has-warning": form.email.$dirty,"has-success": form.email.$valid && form.email.$dirty && !form.email.$error.mongoose,"has-error": form.email.$invalid && form.email.$dirty || form.email.$error.mongoose}')
+					input(placeholder='Your Email', type='email', name='email', ng-model='user.email', required, unique-email, autofocus, on-focus, mongoose-error, data-ng-class="{'invalid': (form.email.$error.email && !form.email.$focused) || form.email.$error.mongoose || (form.email.$error.unique && form.email)}", tabindex="1")
+					p.error(ng-show='form.email.$error.email && !form.email.$focused')
+						| Not a valid email.
+					p.error(ng-show='form.email.$error.mongoose')
+						| {{ errors.email }}
+					p.error(ng-show='form.email.$error.unique && form.email')
+						| That email is already registered.
+				.form-group(ng-class='{"has-warning": form.password.$dirty,"has-success": form.password.$valid && form.password.$dirty && !form.password.$error.mongoose,"has-error": form.password.$invalid && form.password.$dirty || form.password.$error.mongoose}')
+					input(placeholder='Password', type='password', name='password', ng-model='user.password', ng-minlength='5', required, mongoose-error, data-ng-class="{'invalid': (form.password.$error.minlength || form.password.$invalid) && form.password.$dirty && !form.password.$error.required || form.password.$error.mongoose}", tabindex="2")
+					p.error(ng-show='(form.password.$error.minlength || form.password.$invalid) && form.password.$dirty && !form.password.$error.required')
+						| Password must be at least 5 characters.
+					p.error(ng-show='form.password.$error.mongoose')
+						| {{ errors.password }}
+				button.button(type='submit', ng-disabled='form.$invalid', tabindex="3") Sign up
+					i.arrow-right.right.icon
+
+			a.small(href='/login') or log in
+
+.container(data-ng-if="currentUser", data-ng-controller='TimetrackerCtrl')
+
+	.panel.timetracker(on-escape="cleartime()")
+		.icon.input.one.half
+			input.field(type="number", autofocus, min="0", max="24", step="0.25", placeholder="8", data-ng-model="newtimesheet.time", friendly-time, on-enter="logtime()")
+			i.clock.icon
+		.icon.input.one.half
+			input.field(type="text", placeholder="DD/MM/YYYY", data-ng-model="date", date-range-picker, format="dateformat", ranges="dateranges", change="changedate", on-enter="logtime()")
+			i.calendar.icon
+		.input.one.whole
+			select.field(data-ng-model="newtimesheet.project", data-placeholder="Project", ui-select2, on-enter="logtime()")
+				option
+				option(value="{{project._id}}", data-ng-repeat="project in projects") {{project.name}}
+		.input.one.whole
+			input.field(type="text", placeholder="comments...", data-ng-model="newtimesheet.comment", alphanumeric-input, on-enter="logtime()")
+		.input.one.whole
+			button(data-ng-click="logtime()", data-ng-class="{'disabled': !valid}") log time
+
+	ul.timesheets
+		li(data-ng-repeat="timesheet in timesheets | orderBy: 'date'")
+			h4(data-ng-bind="timesheet.date | date:'EEE d MMM'")
+			span.left.floated(data-ng-bind="timesheet.projectname")
+			span.right.floated {{timesheet.duration}} hrs

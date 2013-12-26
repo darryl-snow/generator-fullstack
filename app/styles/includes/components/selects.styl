@@ -1,0 +1,373 @@
+select
+	width 								100%
+
+.select2-container
+	margin								0 0 1em
+	position							relative
+	display								inline-block
+	vertical-align						middle
+	width 								100%
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input
+	box-sizing							border-box
+
+.select2-container .select2-choice
+	input(blue, 100%)
+	display								block
+	box-sizing 							border-box
+	margin 								0
+	padding 							1em
+	position 							relative
+	user-select							none
+	-webkit-backface-visibility 		hidden
+
+.select2-container.select2-drop-above .select2-choice
+	border-bottom-color					#bbb
+	border-radius						0 0 2px 2px
+
+.select2-container.select2-allowclear .select2-choice .select2-chosen
+	color 								textcolour
+	margin-right						1.6em
+
+.select2-container .select2-choice > .select2-chosen
+	margin-right						1.6em
+	display								block
+	overflow							hidden
+	white-space							nowrap
+	text-overflow						ellipsis
+
+.select2-drop-mask
+	border								0
+	margin								0
+	padding								0
+	position							fixed
+	left								0
+	top									0
+	min-height							100%
+	min-width							100%
+	height								auto
+	width								auto
+	opacity								0
+	z-index								9998
+	background-color					white
+
+.select2-drop
+	width								100%
+	margin-top							-1px
+	position							absolute
+	z-index								9999
+	top									100%
+	background							white
+	color								black
+	border								1px solid #bbb
+	border-top							0
+	border-radius						0 0 2px 2px
+	box-shadow							0 1px 1px rgba(black,.25)
+
+.select2-drop-auto-width
+	border-top							1px solid #bbb
+	width								auto
+
+.select2-drop-auto-width .select2-search
+	padding 							1em
+
+.select2-drop.select2-drop-above
+	margin-top							0
+	border-top							1px solid #bbb
+	border-bottom						0
+	border-radius						2px 2px 0 0
+	box-shadow							0 -1px 1px rgba(black,.25)
+	margin-bottom 						-4px
+
+.select2-drop-active
+	border								1px solid blue
+	border-top							none
+
+.select2-drop.select2-drop-above.select2-drop-active
+	border-top							1px solid blue
+
+.select2-container .select2-choice .select2-arrow
+	@extend 							.animated.fast
+	simple-button(light-grey)
+	border-left 						1px solid #bbb
+	border-radius 						0
+	bottom 								0
+	font-size 							1em
+	padding 							1em
+	position 							absolute
+	right 								0
+	top 								0
+	font-family							'iprofero'
+	speak								none
+	font-style							normal
+	font-weight							normal
+	font-variant						normal
+	text-transform						none
+	line-height							1
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing		antialiased
+	-moz-osx-font-smoothing		grayscale
+
+	&:before
+		content							"\e61d"
+
+.select2-container .select2-choice .select2-arrow b
+	display								block
+	width								100%
+	height								100%
+
+.select2-search
+	padding 							1em
+
+.select2-search input
+	margin-bottom 						0
+
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices
+	border								1px solid blue
+	outline								none
+
+.select2-dropdown-open .select2-choice
+	border-bottom-color					transparent
+	box-shadow							0 1px 0 white inset
+	border-bottom-left-radius			0
+	border-bottom-right-radius			0
+
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices
+	border								1px solid blue
+	border-top-color					transparent
+
+.select2-dropdown-open .select2-choice .select2-arrow
+	border-left 						none
+	background							transparent
+
+.select2-results
+	list-style 							none
+	margin								0
+	max-height							200px
+	padding								0 1em 1em 1em
+	position							relative
+	overflow-x							hidden
+	overflow-y							auto
+	-webkit-tap-highlight-color			rgba(black, 0)
+
+.select2-results ul.select2-result-sub
+	margin								0
+	padding-left						0
+
+.select2-results ul.select2-result-sub > li .select2-result-label
+	padding-left						1em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						1.5em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						2em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						2.5em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						3em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						3.5em
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label
+	padding-left						4em
+
+
+.select2-results li
+	list-style							none
+	display								list-item
+	background-image					none
+
+.select2-results li.select2-result-with-children > .select2-result-label
+	font-weight							bold
+
+.select2-results .select2-result-label
+	padding								1em
+	margin								0
+	cursor								pointer
+	min-height							1em
+	user-select							none
+
+.select2-results .select2-highlighted
+	background							blue
+	color								white
+
+.select2-results li em
+	background							lighter-grey
+	font-style							normal
+
+.select2-results .select2-highlighted em
+	background							transparent
+
+.select2-results .select2-highlighted ul
+	background							white
+	color								blue-grey
+
+.select2-results .select2-no-results,
+.select2-results .select2-searching,
+.select2-results .select2-selection-limit
+	background							lighter-grey
+	display								list-item
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+.select2-results .select2-disabled.select2-highlighted
+	color								#666
+	background							lighter-grey
+	display								list-item
+	cursor								default
+
+.select2-results .select2-disabled
+	background							lighter-grey
+	display								list-item
+	cursor								default
+
+.select2-results .select2-selected
+	display								none
+
+.select2-more-results.select2-active
+	background							lighter-grey
+
+.select2-more-results
+	background							lighter-grey
+	display								list-item
+
+/* disabled styles */
+
+.select2-container.select2-container-disabled .select2-choice
+	background-color					lighter-grey
+	background-image					none
+	border								1px solid #ddd
+	cursor								default
+
+.select2-container.select2-container-disabled .select2-choice .select2-arrow
+	border-left 						1px solid #bbb
+	background-color					lighter-grey
+
+.select2-container.select2-container-disabled .select2-choice abbr
+	display								none
+
+.select2-container-multi .select2-choices
+	height								auto !important
+	height								1%
+	margin								0
+	padding								0
+	position							relative
+	border								1px solid #bbb
+	cursor								text
+	overflow							hidden
+	background-color					white
+
+.select2-locked
+	padding								1em !important
+
+.select2-container-multi.select2-container-active .select2-choices
+	border								1px solid blue
+	outline								none
+
+.select2-container-multi .select2-choices li
+	float								left
+	list-style							none
+.select2-container-multi .select2-choices .select2-search-field
+	margin								0
+	padding								0
+	white-space							nowrap
+
+.select2-container-multi .select2-choices .select2-search-field input.select2-active
+	background							white
+
+.select2-default
+	color								grey !important
+
+.select2-container-multi .select2-choices .select2-search-choice
+	padding								3px 5px 3px 18px
+	margin								3px 0 3px 5px
+	position							relative
+	color								dark-grey
+	cursor								default
+	border								1px solid #bbb
+	border-radius						2px
+	box-shadow							0 0 2px white inset, 0 1px 0 rgba(black, 0.05)
+	background-clip						padding-box
+	user-select							none
+	background-color					light-grey
+
+.select2-container-multi .select2-choices .select2-search-choice .select2-chosen
+	color 								textcolour
+	cursor								default
+
+.select2-container-multi .select2-choices .select2-search-choice-focus
+	background							light-grey
+
+.select2-search-choice-close
+	display								block
+	width								12px
+	height								13px
+	position							absolute
+	right								3px
+	top									4px
+	font-size							1px
+	outline								none
+
+.select2-container-multi .select2-search-choice-close
+	left								3px
+
+.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover
+	background-position					right -11px
+
+.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close
+	background-position					right -11px
+
+.select2-container-multi.select2-container-disabled .select2-choices
+	background-color					lighter-grey
+	background-image					none
+	border								1px solid #ddd
+	cursor								default
+
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice
+	padding								1em
+	border								1px solid #ddd
+	background-image					none
+	background-color					lighter-grey
+
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close    display								none
+	background							none
+
+.select2-result-selectable .select2-match,
+.select2-result-unselectable .select2-match
+	text-decoration						underline
+
+.select2-offscreen,
+.select2-offscreen:focus
+	clip								rect(0 0 0 0) !important
+	width								1px !important
+	height								1px !important
+	border								0 !important
+	margin								0 !important
+	padding								0 !important
+	overflow							hidden !important
+	position							absolute !important
+	outline								0 !important
+	left								0px !important
+	top									0px !important
+
+.select2-display-none
+	display								none
+
+.select2-measure-scrollbar
+	position							absolute
+	top									-10000px
+	left								-10000px
+	width								100px
+	height								100px
+	overflow							scroll

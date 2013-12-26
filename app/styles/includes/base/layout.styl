@@ -21,3 +21,60 @@
 .centred
 	display 			block
 	margin 				0 auto 1em
+
+.one.whole,
+.one.half,
+.one.third,
+.one.quarter,
+.one.sixth
+	column(12)
+	overflow 			visible
+
+.one.half
+	@media small-device
+		column(6)
+		overflow 		visible
+
+.one.third
+	@media small-device
+		column(4)
+
+.one.quarter
+	@media small-device
+		column(3)
+
+.one.sixth
+	@media small-device
+		column(2)
+
+.login.panel,
+.signup.panel
+	column(12)
+
+	@media small-device
+		column(6)
+		offset(3)
+
+.timetracker.panel
+	column(12)
+	overflow 			visible
+
+	@media small-device
+		column(6)
+		overflow 		visible
+
+	@media medium-device
+		column(4)
+		overflow 		visible
+
+.timesheets
+	column(12)
+	overflow 			visible
+
+	@media small-device
+		column(6)
+		overflow 		visible
+
+	@media medium-device
+		column(8)
+		overflow 		visible

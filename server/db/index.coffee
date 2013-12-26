@@ -2,7 +2,6 @@ express = require("express")
 path = require("path")
 fs = require("fs")
 mongoose = require("mongoose")
-mongoStore = require("connect-mongo")(express)
 config = require("../config")
 
 # Configure for possible deployment

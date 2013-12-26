@@ -53,7 +53,7 @@ module.exports = (grunt) ->
 				tasks: ["newer:coffee:test", "karma"]
 
 			stylus:
-				files: ["<%= yeoman.app %>/styles/{,*/}*.styl"]
+				files: ["<%= yeoman.app %>/styles/**/{,*/}*.styl"]
 				tasks: ["stylus:server"]
 
 			livereload:
@@ -63,7 +63,7 @@ module.exports = (grunt) ->
 
 			express:
 				files: ["server.coffee", "server/{,*//*}*.{coffee,json}"]
-				tasks: ["express:dev"]
+				tasks: ["express:dev", "phantomas"]
 				options:
 					livereload: true
 					nospawn: true #Without this option specified express won't be reloaded
@@ -264,6 +264,12 @@ module.exports = (grunt) ->
 				template: "<%= yeoman.app %>/styleguide-template"
 
 		
+		phantomas:
+			options:
+				indexPath: "./phantomas"
+				raw: []
+				url: "http://localhost:<%= express.options.port %>"
+
 		# Copies remaining files to places other tasks can use
 		copy:
 			dist:
@@ -344,7 +350,7 @@ module.exports = (grunt) ->
 
 	grunt.registerTask "serve", (target) ->
 		return grunt.task.run(["build", "express:prod", "open", "express-keepalive"]) if target is "dist"
-		grunt.task.run ["clean:server", "concurrent:server", "autoprefixer", "express:dev", "kss", "open", "watch"]
+		grunt.task.run ["clean:server", "concurrent:server", "autoprefixer", "express:dev", "kss", "open", "phantomas", "watch"]
 
 	grunt.registerTask "server", ->
 		grunt.log.warn "The `server` task has been deprecated. Use `grunt serve` to start a server."

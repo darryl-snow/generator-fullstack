@@ -4,7 +4,6 @@ passport = require("passport")
 
 # returns authenticated user
 exports.session = (req, res) ->
-	console.log req
 	res.jsonp req.user
 
 # returns nothing

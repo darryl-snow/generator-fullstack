@@ -1,0 +1,10 @@
+#sidebar.sidebar(data-ng-controller='SidebarCtrl', data-ng-if='currentUser', sidebar)
+	.logo
+		h2
+			img(src="favicon-32x32.png")
+			| organisr.io
+	ul
+		li(data-ng-repeat='item in menu', ui-route='{{item.link}}', data-ng-class='{active: $uiRoute}')
+			a.menuitem(data-ng-href="{{item.link}}")
+				i.left.icon(class="{{item.icon}}")
+				| {{item.title}}

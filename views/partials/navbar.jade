@@ -1,0 +1,29 @@
+.navbar(data-ng-controller='NavbarCtrl')
+	a.left.floated(data-ng-show='currentUser', toggle-sidebar)
+		i.list2.large.icon
+
+	a.logo(href="/", data-ng-class="{'left floated': !currentUser, 'centred': currentUser}")
+		img(src="favicon-32x32.png")
+	
+	.menu
+		ul(data-ng-hide='currentUser')
+			li
+				a(href='/login', ui-route='/login', data-ng-class='{active: $uiRoute}') Log In
+			li.divider |
+			li
+				a(href='/signup', ui-route='/signup', data-ng-class='{active: $uiRoute}') Sign up
+		.dropdown(data-ng-show='currentUser')
+			a.dropdown-toggle
+				img.small.rounded.avatar(data-ng-src="{{currentUser.avatar}}", data-ng-if="currentUser.avatar")
+				i.left.user.icon(data-ng-show="!currentUser.avatar")
+				span(data-ng-bind="currentUser.name")
+				i.right.arrow-down.icon
+			ul.dropdown-menu
+				li(ui-route='/me', data-ng-class='{active: $uiRoute}')
+					a(href="/me")
+						i.left.user.icon
+						| Profile
+				li
+					a(data-ng-click="logout()")
+						i.left.logout.icon
+						| Logout
