@@ -33,8 +33,8 @@ module.exports = (app, passport) ->
 	app.post "/api/" + config.apiversion + "/projects", auth.requiresLogin, projects.create
 	app.get "/api/" + config.apiversion + "/projects", auth.requiresLogin, projects.all
 	app.get "/api/" + config.apiversion + "/projects/:projectId", auth.requiresLogin, projects.show
-	app.put "/api/" + config.apiversion + "/projects/:projectId", auth.requiresLogin, auth.user.hasAuthorisation, projects.update
-	app.del "/api/" + config.apiversion + "/projects/:projectId", auth.requiresLogin, auth.user.hasAuthorisation, projects.remove
+	app.put "/api/" + config.apiversion + "/projects/:projectId", auth.requiresLogin, auth.project.hasAuthorisation, projects.update
+	app.del "/api/" + config.apiversion + "/projects/:projectId", auth.requiresLogin, auth.project.hasAuthorisation, projects.remove
 	app.param "projectId", projects.project
 
 	# Agencies Routes

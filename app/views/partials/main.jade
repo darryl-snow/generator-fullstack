@@ -26,26 +26,22 @@ div(data-ng-if="!currentUser")
 
 			a.small(href='/login') or log in
 
-.container(data-ng-if="currentUser", data-ng-controller='TimetrackerCtrl')
+.container(data-ng-if="currentUser")
 
-	.panel.timetracker(on-escape="cleartime()")
+	h3.centre.aligned Time Tracker
+
+	.panel.timetracker(on-escape="cleartime()", data-ng-controller='TimetrackerCtrl')
 		.icon.input.one.half
-			input.field(type="number", autofocus, min="0", max="24", step="0.25", placeholder="8", data-ng-model="newtimesheet.time", friendly-time, on-enter="logtime()")
+			input.field(type="number", autofocus, min="0", max="24", step="0.25", placeholder="8", data-ng-model="newtimesheet.time", friendly-time, on-enter="logtime()", select-all)
 			i.clock.icon
 		.icon.input.one.half
 			input.field(type="text", placeholder="DD/MM/YYYY", data-ng-model="date", date-range-picker, format="dateformat", ranges="dateranges", change="changedate", on-enter="logtime()")
 			i.calendar.icon
 		.input.one.whole
-			select.field(data-ng-model="newtimesheet.project", data-placeholder="Project", ui-select2, on-enter="logtime()")
-				option
-				option(value="{{project._id}}", data-ng-repeat="project in projects") {{project.name}}
+			input.field.sfTypeahead(type="text", placeholder="Project", datasets="projects", ng-model="newtimesheet.project")
+		.input.one.whole(data-ng-if="currentUser.agency")
+			input.field.sfTypeahead(type="text", placeholder="Activity", datasets="activities", ng-model="newtimesheet.activity")
 		.input.one.whole
-			input.field(type="text", placeholder="comments...", data-ng-model="newtimesheet.comment", alphanumeric-input, on-enter="logtime()")
-		.input.one.whole
-			button(data-ng-click="logtime()", data-ng-class="{'disabled': !valid}") log time
-
-	ul.timesheets
-		li(data-ng-repeat="timesheet in timesheets | orderBy: 'date'")
-			h4(data-ng-bind="timesheet.date | date:'EEE d MMM'")
-			span.left.floated(data-ng-bind="timesheet.projectname")
-			span.right.floated {{timesheet.duration}} hrs
+			textarea.field(type="text", placeholder="comments...", data-ng-model="newtimesheet.comment", alphanumeric-input, on-enter="logtime()", expand-on-focus)
+		.input.one.whole.centre.aligned
+			button.field(data-ng-click="logtime()", data-ng-class="{'disabled': !valid}") log time

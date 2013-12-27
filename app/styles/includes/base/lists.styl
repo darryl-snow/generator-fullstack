@@ -48,3 +48,47 @@
 		padding 			1em
 		margin 				0 0 0.2em 0
 		group()
+
+.projects
+	@extend 				.unstyled-list
+	padding 				0
+
+.project
+	border-bottom 			1px solid light-grey
+	cursor 					pointer
+	line-height 			3em
+	overflow 				hidden
+	padding 				0 0 0 1em
+
+	a
+		@extend 			.animated.fast
+		color 				white
+		display 			block
+		margin-right 		-4em
+		opacity 			0.7
+		padding 			0 1em
+		width 				1em
+
+		&.edit
+			background 		green
+
+		&.delete
+			background 		red
+
+	&:hover
+		@extend 			.animated.fast
+		background 			lighten(light-grey, 60%)
+
+		a
+			opacity 		1
+
+	&:last-of-type
+		border-bottom 		none
+
+	&.swiped
+		a
+			@extend 		.animated.fast
+			margin-right 	0
+
+	&.editing
+		opacity 			0.3

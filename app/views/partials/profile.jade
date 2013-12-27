@@ -5,3 +5,11 @@
 			tr
 				td email:
 				td(data-ng-bind="user.email")
+			tr
+				td role:
+				td
+					select(data-ng-model="user.role", ui-select2)
+						option(value="user") user
+						option(value="manager") manager
+						option(value="admin") admin
+						option(value="superuser", data-ng-if="user.role=='superuser'") superuser

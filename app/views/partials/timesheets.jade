@@ -1,0 +1,9 @@
+.container(data-ng-init="find()")
+
+	h3.centre.aligned Timesheets
+
+	ul.timesheets
+		li(data-ng-repeat="timesheet in timesheets | orderBy:'date':reverse=true")
+			h4(data-ng-bind="timesheet.date | date:'EEE d MMM'")
+			span.left.floated(data-ng-bind="timesheet.projectname")
+			span.right.floated {{timesheet.duration}} hrs

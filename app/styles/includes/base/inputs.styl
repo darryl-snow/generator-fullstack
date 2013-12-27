@@ -11,7 +11,8 @@
 // Styleguide 1.9
 
 input,
-select
+select,
+textarea
 	@extend 					.animated.fast
 	input(blue, 100%)
 	box-sizing 					border-box
@@ -57,3 +58,12 @@ select
 
 .fadeout
 	opacity 					0.3
+
+textarea
+	height 						3.5em
+
+	&.expanded
+		height 					8em
+
+.twitter-typeahead
+	width 						100% !important

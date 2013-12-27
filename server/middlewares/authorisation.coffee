@@ -29,3 +29,9 @@ exports.user =
 	isInAgency: (req, res, next) ->
 		return res.send(401, "User is not authorised") unless (req.user.agency is req.agency._id or req.user.role is "superuser")
 		next()
+
+exports.project =
+
+	hasAuthorisation: (req, res, next) ->
+		return res.send(401, "User is not authorised") unless (req.user._id in req.agency.admins or req.user.role is "superuser" or req.user._id is req.project.owner)
+		next()

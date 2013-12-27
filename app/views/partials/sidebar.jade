@@ -5,6 +5,11 @@
 			| organisr.io
 	ul
 		li(data-ng-repeat='item in menu', ui-route='{{item.link}}', data-ng-class='{active: $uiRoute}')
-			a.menuitem(data-ng-href="{{item.link}}")
+			a.menuitem(href="{{item.link}}", sidebar-link)
+				i.left.icon(class="{{item.icon}}")
+				| {{item.title}}
+	ul.admin.menu(data-ng-if='hasAuth && adminmenu.length > 0')
+		li(data-ng-repeat='item in adminmenu', ui-route='{{item.link}}', data-ng-class='{active: $uiRoute}')
+			a.menuitem(href="{{item.link}}", sidebar-link)
 				i.left.icon(class="{{item.icon}}")
 				| {{item.title}}

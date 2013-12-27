@@ -15,9 +15,22 @@ button
 	border 					none
 	cursor 					pointer
 
+	&.small
+		simple-button(dark-blue, 'small')
+
 	&.large
 		simple-button(dark-blue, 'large')
 
 	&.disabled
 		button-disabled()
 		cursor 				not-allowed
+
+	&.edit
+		simple-button(green)
+
+	&.delete
+		simple-button(red)
+
+.newproject button
+	font-size 				1em
+	padding 				0.9em

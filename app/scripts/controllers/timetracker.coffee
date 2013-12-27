@@ -41,8 +41,19 @@ angular.module('iproferoApp')
 
 		# Get list of user/agency projects to populate
 		# projects list
-		Project.query "", (projects) ->
-			$scope.projects = projects
+		# Project.query "", (projects) ->
+		# 	$scope.projects = projects
+
+		$scope.projects =
+			name: "projects"
+			valueKey: "name"
+			prefetch: "/api/1/projects"
+
+		if $scope.currentUser.agency? and $scope.currentUser.agency isnt ""
+			$scope.activities =
+				name: "activities"
+				valueKey: "name"
+				prefetch: "/api/1/agencies/" + $scope.currentUser.agency + "/activities"
 
 		# Setup new timesheet, getting data from LS if it's there
 		# or otherwise using default values
@@ -175,12 +186,15 @@ angular.module('iproferoApp')
 					newdata = new Timesheet
 						date: moment($scope.newtimesheet.date.from, $scope.dateformat).local().toISOString()
 						duration: $scope.newtimesheet.time
-						project: $scope.newtimesheet.project
+						project: $scope.newtimesheet.project._id
 						user: $scope.user._id
 						comment: $scope.newtimesheet.comment
+						activity: $scope.newtimesheet.activity._id
 						agency: $scope.user.agency
 
 					newdata.$save (response) ->
+
+						console.log response
 
 						if !response.errors?
 							# timesheet saved successfully, add to list
@@ -199,9 +213,10 @@ angular.module('iproferoApp')
 						newdata = new Timesheet
 							date: moment($scope.newtimesheet.date.from, $scope.dateformat).add(n, 'days').local().toISOString()
 							duration: $scope.newtimesheet.time
-							project: $scope.newtimesheet.project
+							project: $scope.newtimesheet.project._id
 							user: $scope.user._id
 							comment: $scope.newtimesheet.comment
+							activity: $scope.newtimesheet.activity._id
 							agency: $scope.user.agency
 
 						newdata.$save (response) ->
@@ -226,11 +241,8 @@ angular.module('iproferoApp')
 				project: ""
 
 		$scope.addTimesheet = (timesheet) ->
-			for project in $scope.projects
-				if project._id is timesheet.project
-					timesheet.projectname = project.name
-					break
-			# timesheet.date = moment(timesheet.date).format("ddd D MMM")
+			timesheet.projectname = $scope.newtimesheet.project.name
+			timesheet.activityname = $scope.newtimesheet.activity.name
 			$scope.timesheets.push timesheet
 
 	]

@@ -35,8 +35,19 @@
 .dropdown-toggle:focus
 	outline 				0
 
+.tt-dropdown-menu
+	margin-top 				-1em !important
+	width 					100%
+
+.tt-suggestion
+	padding 				0.5em
+
+.tt-suggestion.tt-is-under-cursor
+	background 				lighter-grey
+
 // The dropdown menu (ul)
-.dropdown-menu
+.dropdown-menu,
+.tt-dropdown-menu
 	background-clip			padding-box
 	background-color		white
 	border					1px solid light-grey
@@ -66,7 +77,8 @@
 		padding				0.7em 1em
 		white-space			nowrap
 
-.dropdown-menu > li
+.dropdown-menu > li,
+.tt-dropdown-menu > li
 	display 				block !important
 	padding 				0
 
