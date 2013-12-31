@@ -1,4 +1,4 @@
-.container(data-ng-controller="ProjectsCtrl")
+.container(data-ng-controller="ProjectsCtrl", on-escape="cancelEdit()", global)
 
 	h1 Projects
 
@@ -16,3 +16,4 @@
 			input(type="text", placeholder="New Project", data-ng-model="newproject.name", autofocus)
 			button(data-ng-click="addproject()", data-ng-class="{'edit':newproject.editing}")
 				i.icon(data-ng-class="{'plus':!newproject.editing, 'pencil':newproject.editing}")
+notifications

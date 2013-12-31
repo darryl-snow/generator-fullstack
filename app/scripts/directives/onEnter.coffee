@@ -7,3 +7,4 @@ angular.module('iproferoApp')
 			element.on "keydown", (event) ->
 				if event.which == 13
 					scope.$apply attrs.onEnter
+					event.preventDefault()

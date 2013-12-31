@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('iproferoApp')
-	.controller 'TimetrackerCtrl', ['$scope', '$http', 'localStorageService', 'Project', 'Timesheet', '$rootScope', ($scope, $http, localStorageService, Project, Timesheet, $rootScope) ->
+	.controller 'TimetrackerCtrl', ['$scope', '$http', 'localStorageService', 'Project', 'Activity', 'Timesheet', '$rootScope', '$notification', ($scope, $http, localStorageService, Project, Activity, Timesheet, $rootScope, $notification) ->
 
 		$scope.timesheets = [];
 		$scope.user = $rootScope.currentUser
@@ -41,19 +41,16 @@ angular.module('iproferoApp')
 
 		# Get list of user/agency projects to populate
 		# projects list
-		# Project.query "", (projects) ->
-		# 	$scope.projects = projects
-
-		$scope.projects =
-			name: "projects"
-			valueKey: "name"
-			prefetch: "/api/1/projects"
+		Project.query "", (projects) ->
+			$scope.projects = projects
 
 		if $scope.currentUser.agency? and $scope.currentUser.agency isnt ""
-			$scope.activities =
-				name: "activities"
-				valueKey: "name"
-				prefetch: "/api/1/agencies/" + $scope.currentUser.agency + "/activities"
+			# Get list of agency activities to populate
+			# activities list
+			Activity.query
+				agencyId: $scope.currentUser.agency
+			, (activities) ->
+				$scope.activities = activities
 
 		# Setup new timesheet, getting data from LS if it's there
 		# or otherwise using default values
@@ -66,6 +63,7 @@ angular.module('iproferoApp')
 					from: moment()
 					to: moment()
 				project: localStorageService.get('timesheet').project
+				activity: localStorageService.get('timesheet').activity
 
 			if localStorageService.get('timesheet').datePreference?
 				$scope.date = localStorageService.get('timesheet').datePreference
@@ -194,14 +192,14 @@ angular.module('iproferoApp')
 
 					newdata.$save (response) ->
 
-						console.log response
-
 						if !response.errors?
 							# timesheet saved successfully, add to list
 							$scope.addTimesheet(response)
 							$scope.cleartime()
+							$notification.success("success", "Saved")
 						else
 							console.log response.errors.name.message
+							$notification.error("failed", response.errors.name.message)
 
 				else
 
@@ -225,12 +223,15 @@ angular.module('iproferoApp')
 								# timesheet saved successfully, add to list
 								$scope.addTimesheet(response)
 								$scope.cleartime()
+								$notification.success("success", "Saved")
 							else
 								console.log response.errors.name.message
+								$notification.error("failed", response.errors.name.message)
 
 			else
 				console.log "Missing or invalid timesheet data"
 				console.log $scope.newtimesheet
+				$notification.error("failed", "Missing or invalid timesheet data")
 
 		$scope.cleartime = ->
 			$scope.newtimesheet =

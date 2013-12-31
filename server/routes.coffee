@@ -24,6 +24,7 @@ module.exports = (app, passport) ->
 	# app.get "/api/" + config.apiversion + "/users", users.all
 	app.post "/api/" + config.apiversion + "/users", users.create
 	app.get "/api/" + config.apiversion + "/users", auth.requiresLogin, users.all
+	app.get "/api/" + config.apiversion + "/users/all", auth.requiresLogin, users.everyone
 	app.get "/api/" + config.apiversion + "/users/:userId", auth.requiresLogin, users.show
 	app.put "/api/" + config.apiversion + "/users/:userId", auth.requiresLogin, auth.user.hasAuthorisation, users.update
 	app.del "/api/" + config.apiversion + "/users/:userId", auth.requiresLogin, auth.user.hasAuthorisation, users.remove

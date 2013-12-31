@@ -18,6 +18,9 @@
 .centre.aligned
 	text-align 			center
 
+.left.aligned
+	text-align 			left
+
 .centred
 	display 			block
 	margin 				0 auto 1em
@@ -26,9 +29,11 @@
 .one.half,
 .one.third,
 .one.quarter,
+.five.twelfths,
 .one.sixth
 	column(12)
 	overflow 			visible
+	word-wrap 			break-word
 
 .one.half
 	@media small-device
@@ -39,13 +44,22 @@
 	@media small-device
 		column(4)
 
+.list.third
+	column(4)
+
 .one.quarter
 	@media small-device
 		column(3)
 
+.five.twelfths
+	@media small-device
+		column(5)
+		overflow 		visible
+
 .one.sixth
 	@media small-device
 		column(2)
+		overflow 		visible
 
 .login.panel,
 .signup.panel
@@ -54,6 +68,13 @@
 	@media small-device
 		column(6)
 		offset(3)
+
+.agency.panel
+	column(12)
+
+	@media small-device
+		column(8)
+		offset(2)
 
 .timetracker.panel
 	column(12)
@@ -78,3 +99,10 @@
 
 .newproject button
 	column(2)
+
+.padded
+	box-sizing 			border-box
+	padding 			0.5em
+
+	input
+		margin 			0

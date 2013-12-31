@@ -27,10 +27,23 @@ button
 
 	&.edit
 		simple-button(green)
+		color 				white
 
 	&.delete
 		simple-button(red)
+		color 				white
+
+		&:active,
+		&:focus,
+		&:hover
+			color 			white
 
 .newproject button
 	font-size 				1em
 	padding 				0.9em
+
+.delete.agency.button
+	column(6)
+	offset(3)
+	display 				block
+	margin-top 				1em

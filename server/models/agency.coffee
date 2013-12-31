@@ -4,6 +4,7 @@ Schema = mongoose.Schema
 AgencySchema = new Schema(
 	name: String
 	admins: [String]
+	people: [String]
 	paymentplan: String
 	currency: String
 	paymentdate: Date

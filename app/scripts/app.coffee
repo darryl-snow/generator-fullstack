@@ -8,7 +8,7 @@ angular.module('iproferoApp', [
  'ui.route',
  'http-auth-interceptor',
  'ui.bootstrap',
- # 'ui.select2',
+ 'ui.select2',
  'ngTouch',
  'siyfion.sfTypeahead'
 ])
@@ -33,6 +33,15 @@ angular.module('iproferoApp', [
 			.when '/timesheets/report',
 				templateUrl: 'partials/timesheets'
 				controller: 'TimesheetsCtrl'
+			.when '/activities',
+				templateUrl: 'partials/activities'
+				controller: 'ActivitiesCtrl'
+			.when '/agency/new',
+				templateUrl: 'partials/createagency'
+				controller: 'NewAgencyCtrl'
+			.when '/agency/:id',
+				templateUrl: 'partials/agency'
+				controller: 'AgencyCtrl'
 			.otherwise
 				redirectTo: '/'
 		$locationProvider.html5Mode(true)

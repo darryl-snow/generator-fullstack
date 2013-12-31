@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('iproferoApp')
-	.controller 'ProjectsCtrl', ['$scope', '$http', 'Project', ($scope, $http, Project) ->
+	.controller 'ProjectsCtrl', ['$scope', '$http', 'Project', '$notification', ($scope, $http, Project, $notification) ->
 
 		# Get list of user/agency projects to populate
 		# projects list
@@ -33,8 +33,10 @@ angular.module('iproferoApp')
 						if !response.errors?
 							$scope.projects.push response
 							$scope.clearproject()
+							$notification.success("success", "Saved " + project.name)
 						else
 							console.log response.errors.name.message
+							$notification.error("failed", response.errors.name.message)
 
 		$scope.swipeLeft = (project) ->
 			project.swiped = true
@@ -52,13 +54,26 @@ angular.module('iproferoApp')
 				name: project.name
 				editing: project.editing
 
+		$scope.cancelEdit = ->
+			console.log "cancelled"
+			for project in $scope.projects
+				project.editing = false
+				project.swiped = false
+			$scope.clearproject()
+
 		$scope.deleteproject = (project) ->
+			tmp = 
+				name: project.name
+				id: project.id
+			console.log tmp
 			project.$remove (response) ->
 				if response.$resolved
 					
+					$notification.warning("undo?", "Removed " + tmp.name)
+
 					if $scope.projects?
 						$scope.projects =
-							$scope.projects.filter (proj) -> proj._id != project._id
+							$scope.projects.filter (proj) -> proj._id != tmp.id
 
 		$scope.clearproject = ->
 

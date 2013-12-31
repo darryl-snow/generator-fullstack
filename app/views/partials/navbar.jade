@@ -23,6 +23,10 @@
 					a(href="/me")
 						i.left.user.icon
 						| Profile
+				li(ui-route="/agency/new", data-ng-class="{active: $uiRoute}", data-ng-if="!currentUser.agency")
+					a(href="/agency/new")
+						i.left.users.icon
+						| Create an Agency
 				li
 					a(data-ng-click="logout()")
 						i.left.logout.icon

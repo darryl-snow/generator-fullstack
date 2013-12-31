@@ -32,6 +32,14 @@ exports.all = (req, res) ->
 	else
 		res.jsonp {}
 
+exports.everyone = (req, res) ->
+	User.find(agency: "").sort("-created").populate("user").exec (err, users) ->
+		if err
+			res.render "error",
+			status: 500
+		else
+			res.jsonp users
+
 # Show single user profile
 exports.show = (req, res) ->
 	if req.profile._id is req.user._id or (req.profile.agency is req.user.agency and (req.user.role is "admin" or req.user.role is "superuser"))

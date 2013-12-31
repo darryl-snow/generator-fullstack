@@ -1,0 +1,11 @@
+.container
+	.panel.login.centre.aligned
+		h1 Create a new agency
+		form(name='form', data-ng-submit='createAgency(form)', novalidate)
+			div(ng-class='{"has-error": form.email.$error.mongoose}')
+				label(for="name") What would you like your agency to be called?
+				input#name(data-ng-model="newagency.name" placeholder="e.g. superagency", required, autofocus, mongoose-error, tabindex="1")
+				p.error(ng-show='form.name.$error.mongoose')
+					| {{ errors.email }}
+			button.button(type="submit", tabindex="2") create
+				i.right.arrow-right.icon
