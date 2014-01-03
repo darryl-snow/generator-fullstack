@@ -1,0 +1,114 @@
+@-webkit-keyframes ngdialog-fadeout
+	0%
+		opacity						1
+
+	100%
+		opacity						0
+
+@keyframes ngdialog-fadeout
+	0%
+		opacity						1
+
+	100%
+		opacity						0
+
+@-webkit-keyframes ngdialog-fadein
+	0%
+		opacity						0
+
+	100%
+		opacity						1
+
+@keyframes ngdialog-fadein
+	0%
+		opacity						0
+
+	100%
+		opacity						1
+
+.ngdialog,
+.ngdialog *,
+.ngdialog *:before,
+.ngdialog *:after
+	box-sizing						border-box
+
+.ngdialog
+	position						fixed
+	overflow						auto
+	-webkit-overflow-scrolling		touch
+	z-index							100000
+	top								0
+	right							0
+	bottom							0
+	left							0
+
+.ngdialog-overlay
+	position						fixed
+	background						rgba(black, 0.9)
+	top								0
+	right							0
+	bottom							0
+	left							0
+	height							20000px
+	-webkit-backface-visibility		hidden
+	-webkit-animation				ngdialog-fadein 0.5s
+	animation						ngdialog-fadein 0.5s
+
+.ngdialog.ngdialog-closing .ngdialog-overlay
+	-webkit-backface-visibility		hidden
+	-webkit-animation				ngdialog-fadeout 0.5s
+	animation						ngdialog-fadeout 0.5s
+
+.ngdialog-content
+	// background						white
+	-webkit-backface-visibility		hidden
+	-webkit-animation				ngdialog-fadein 0.5s
+	animation						ngdialog-fadein 0.5s
+
+.modal
+	@extends 						.animated.fast
+	color 							white
+	margin 							0 auto
+	padding 						1em
+	position 						relative
+	width 							90%
+
+	@media small-device
+		width 						60%
+
+	@media medium-device
+		width 						40%
+
+	small
+		display						block
+		font-size					0.7em
+		margin-top					2em
+		opacity						0.5
+
+button + a
+	margin-left 					1em
+
+.ngdialog.ngdialog-closing .ngdialog-content
+	-webkit-backface-visibility		hidden
+	-webkit-animation				ngdialog-fadeout 0.5s
+	animation						ngdialog-fadeout 0.5s
+
+.ngdialog-close
+	cursor 							pointer
+
+.ngdialog-close:before
+	@extend 						.animated.fast
+	content							'\00D7'
+	cursor							pointer
+	opacity 						0.5
+	position 						absolute
+	right 							1em
+	top 							1em
+
+	&:active,
+	&:focus,
+	&:hover
+		opacity 					1
+
+body.ngdialog-open
+	overflow						hidden

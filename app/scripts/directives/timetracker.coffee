@@ -5,7 +5,7 @@ angular.module('iproferoApp')
 		template:
 			'<div on-escape="cleartime()" data-ng-controller="TimetrackerCtrl" class="panel timetracker">' +
 			'	<div class="icon input one half">' +
-			'		<input type="number" autofocus="autofocus" min="0" max="24" step="0.25" placeholder="8" data-ng-model="newtimesheet.time" friendly-time on-enter="logtime()" select-all class="field"/><i class="clock icon"></i>' +
+			'		<input type="text" autofocus="autofocus" min="0" max="24" step="0.25" placeholder="8" data-ng-model="newtimesheet.time" friendly-time on-enter="logtime()" select-all class="field"/><i class="clock icon"></i>' +
 			'	</div>' +
 			'	<div class="icon input one half">' +
 			'		<input type="text" placeholder="DD/MM/YYYY" data-ng-model="date" date-range-picker="date-range-picker" format="dateformat" ranges="dateranges" change="changedate" on-enter="logtime()" class="field"/><i class="calendar icon"></i>' +

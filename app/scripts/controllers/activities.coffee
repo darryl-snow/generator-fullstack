@@ -13,11 +13,17 @@ angular.module('iproferoApp')
 
 		$scope.cancelEdit = ->
 			for activity in $scope.activities
+				if activity.name is ""
+					activity.name = "?"
+				if activity.hourlyrate is ""
+					activity.hourlyrate = 0
+				if activity.dailyrate is ""
+					activity.dailyrate = 0
 				activity.editing = false
 
 		$scope.update = (activity) ->
-			activity.editing = false
 			if $scope.validate(activity)
+				activity.editing = false
 				activity.$update (response) ->
 					if response.errors?
 						console.log response.errors.name.message
@@ -53,7 +59,6 @@ angular.module('iproferoApp')
 		$scope.validate = (activity) ->
 
 			if !activity.name? or activity.name is ""
-				$scope.delete(activity)
 				return false
 			else if activity.name.match(/[^a-zA-Z0-9,.!'"\s]/g)
 				activity.name = activity.name.replace(/[^a-zA-Z0-9,.!'"\s]/g, "")
@@ -71,7 +76,6 @@ angular.module('iproferoApp')
 			activity
 
 		$scope.delete = (activity) ->
-			console.log activity
 			tmp =
 				name: activity.name
 				id: activity.id

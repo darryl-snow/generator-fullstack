@@ -5,6 +5,8 @@ express = require("express")
 path = require("path")
 fs = require("fs")
 passport = require("passport")
+nodemailer = require("nodemailer")
+schedule = require("node-schedule")
 app = express()
 
 # Configuration
@@ -15,6 +17,9 @@ require("./server/db")
 
 # Authentication
 require("./server/authentication") passport
+
+# Emails
+require("./server/emails")
 
 # Routes
 routes = require("./server/routes") app, passport

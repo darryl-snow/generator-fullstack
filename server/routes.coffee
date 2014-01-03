@@ -67,6 +67,7 @@ module.exports = (app, passport) ->
 	app.get "/api/" + config.apiversion + "/agencies/:agencyId/timesheets", auth.requiresLogin, auth.user.isAgencyAdmin, timesheets.forAgency
 	app.put "/api/" + config.apiversion + "/timesheets/:timesheetId", auth.requiresLogin, auth.user.hasAuthorisation, timesheets.update
 	app.del "/api/" + config.apiversion + "/timesheets/:timesheetId", auth.requiresLogin, auth.user.hasAuthorisation, timesheets.remove
+	app.get "/api/" + config.apiversion + "/timesheets/peopletoremind", auth.requiresLogin, timesheets.peopletoremind
 	app.param "timesheetId", timesheets.timesheet
 
 	# Holiday Routes

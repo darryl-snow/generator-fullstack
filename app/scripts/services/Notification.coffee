@@ -50,6 +50,9 @@ angular.module('iproferoApp')
 		disableHtml5Mode: ->
 			settings.html5Mode = false
 
+		getHtml5Mode: ->
+			settings.html5Mode
+
 		disableType: (notificationType) ->
 			settings[notificationType].enabled = false
 

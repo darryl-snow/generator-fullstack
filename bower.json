@@ -24,7 +24,8 @@
     "sidr": "latest",
     "angular-touch": "~1.2.6",
     "angular-typeahead": "~0.0.12",
-    "listjs": "~1.0.0"
+    "listjs": "~1.0.0",
+    "ngDialog": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
@@ -36,7 +37,7 @@
     }
   },
   "resolutions": {
-    "angular": "1.2.4",
+    "angular": "1.2.6",
     "jquery": "~2.0.3"
   }
 }

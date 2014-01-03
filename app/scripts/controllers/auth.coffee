@@ -1,11 +1,11 @@
 'use strict'
 
 angular.module('iproferoApp')
-	.controller 'AuthCtrl', ['$scope', 'Auth', '$location', '$notification', ($scope, Auth, $location, $notification) ->
+	.controller 'AuthCtrl', ['$scope', 'Auth', '$location', ($scope, Auth, $location) ->
 		$scope.error = {}
 		$scope.user = {}
 		$scope.login = (form) ->
-			$notification.enableHtml5Mode()
+
 			Auth.login "password",
 				email: $scope.user.email
 				password: $scope.user.password
@@ -21,7 +21,7 @@ angular.module('iproferoApp')
 					$scope.error.other = err.message
 
 		$scope.register = (form) ->
-			$notification.enableHtml5Mode()
+
 			Auth.createUser
 				email: $scope.user.email
 				username: $scope.user.username

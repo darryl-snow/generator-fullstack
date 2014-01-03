@@ -4,21 +4,23 @@
 		li.titles
 			.one.third(data-ng-click="predicate = 'name'; reverse=!reverse") Activity name
 				i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'name'")
-			.one.third(data-ng-click="predicate = 'hourlyrate'; reverse=!reverse") Hourly rate
+			.one.quarter(data-ng-click="predicate = 'hourlyrate'; reverse=!reverse") Hourly rate
 				i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'hourlyrate'")
-			.one.third(data-ng-click="predicate = 'dailyrate'; reverse=!reverse") Daily rate
+			.one.quarter(data-ng-click="predicate = 'dailyrate'; reverse=!reverse") Daily rate
 				i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'dailyrate'")
+			.one.sixth
 		li(data-ng-repeat="activity in activities | orderBy:predicate:reverse")
 			.padded.one.third
 				span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.name}}
-				.input
-					input(data-ng-model="activity.name", data-ng-show="activity.editing", on-enter="update(activity)", alphanumeric-input)
-			.padded.one.third
+				input(data-ng-model="activity.name", data-ng-show="activity.editing", on-enter="update(activity)", alphanumeric-input)
+			.padded.one.quarter
 				span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.hourlyrate}}
 				input(data-ng-model="activity.hourlyrate", data-ng-show="activity.editing", on-enter="update(activity)", numeric-input)
-			.padded.one.third
+			.padded.one.quarter
 				span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.dailyrate}}
 				input(data-ng-model="activity.dailyrate", data-ng-show="activity.editing", on-enter="update(activity)", numeric-input)
+			.padded.one.sixth
+				i.cross.icon.plain.circular.button(data-ng-click="delete(activity)")
 
 	.newactivity#newactivity
 		form

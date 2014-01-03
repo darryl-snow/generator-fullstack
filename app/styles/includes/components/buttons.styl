@@ -38,6 +38,24 @@ button
 		&:hover
 			color 			white
 
+	&.plain
+		@extend 			.animated.fast
+		background			none
+		border				1px solid light-grey
+		font-size			1em
+		color				grey
+		padding				0.5em
+
+		&:active,
+		&:focus,
+		&:hover
+			color 			red
+			background-color rgba(white, 0.4)
+			border-color 	lightish-grey
+
+	&.circular
+		rounded()
+
 .newproject button
 	font-size 				1em
 	padding 				0.9em

@@ -87,10 +87,21 @@ angular.module('iproferoApp')
 			$scope.checkTime() and $scope.checkDate() and $scope.checkProject()
 
 		$scope.checkTime = ->
-			$scope.newtimesheet.time isnt 'undefined' and $scope.newtimesheet.time > 0
+			$scope.newtimesheet.time isnt 'undefined' and $scope.getHours() > 0
 
 		$scope.checkDate = ->
 			$scope.validDate
+
+		$scope.getHours = ->
+			if $scope.newtimesheet.time?
+				time = $scope.newtimesheet.time.split(" ")
+				if time.length > 1
+					hours = time[0].replace("hrs", "")
+					minutes = time[1].replace("mins", "") / 60
+					time = Number(hours) + Number(minutes)
+				else
+					time = Number(time[0].replace("hrs", ""))
+				time
 
 		$scope.okDates = [
 			"Today", "Yesterday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
@@ -183,7 +194,7 @@ angular.module('iproferoApp')
 
 					newdata = new Timesheet
 						date: moment($scope.newtimesheet.date.from, $scope.dateformat).local().toISOString()
-						duration: $scope.newtimesheet.time
+						duration: $scope.getHours()
 						project: $scope.newtimesheet.project._id
 						user: $scope.user._id
 						comment: $scope.newtimesheet.comment
@@ -210,7 +221,7 @@ angular.module('iproferoApp')
 
 						newdata = new Timesheet
 							date: moment($scope.newtimesheet.date.from, $scope.dateformat).add(n, 'days').local().toISOString()
-							duration: $scope.newtimesheet.time
+							duration: $scope.getHours()
 							project: $scope.newtimesheet.project._id
 							user: $scope.user._id
 							comment: $scope.newtimesheet.comment
@@ -235,7 +246,7 @@ angular.module('iproferoApp')
 
 		$scope.cleartime = ->
 			$scope.newtimesheet =
-				time: ""
+				time: 0
 				date:
 					from: moment()
 					to: moment()

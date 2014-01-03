@@ -65,6 +65,7 @@ module.exports = (grunt) ->
 				files: ["server.coffee", "server/{,*//*}*.{coffee,json}"]
 				tasks: ["express:dev", "phantomas"]
 				options:
+					debounceDelay: 1000
 					livereload: true
 					nospawn: true #Without this option specified express won't be reloaded
 

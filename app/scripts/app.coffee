@@ -10,7 +10,8 @@ angular.module('iproferoApp', [
  'ui.bootstrap',
  'ui.select2',
  'ngTouch',
- 'siyfion.sfTypeahead'
+ 'siyfion.sfTypeahead',
+ 'ngDialog'
 ])
 	.config(['$routeProvider', '$locationProvider', '$httpProvider', ($routeProvider, $locationProvider, $httpProvider) ->
 
