@@ -50,26 +50,27 @@ exports.remove = (req, res) ->
 			res.send "OK"
 
 exports.peopletoremind = (req, res) ->
-	# make array of people to remind, key:value
-	# get all users: ID, name, email
-	# make list of all user IDs and make ID the key in peopletoremind array
-	# get user IDs for all timesheets for this week
-	# where there's no overlap (users IDs that aren't in the timesheets list), add user email to peopletoremind array at user ID key
+	peopletoremind = []
+	timesheetusers = []
+	today = new Date()
+	startofthisweek = new Date(today.setDate(today.getDate() - today.getDay()))
+	Timesheet.find(date: $gte: startofthisweek).select("user").sort("user").exec (err, timesheets) ->
+		for timesheet in timesheets
+			if timesheet.user not in timesheetusers
+				timesheetusers.push timesheet.user.toString()
+		User.find(agency: req.user.agency).select("_id name email").sort("_id").exec (err, users) ->
+			for user in users
+				# see if user has not submitted a timesheet
+				if user._id.toString() not in timesheetusers
+					peopletoremind.push
+						name: user.name
+						email: user.email
 
-	peopletoremind = null
-	userdetails = []
-	userids = []
-	User.find().select("_id name email").exec (err, users) ->
-		for user in users
-			userdetails[user._id] = 
-				name: user.name
-				email: user.email
-			userids.push user._id
-		console.log userdetails
-		# get all timesheets for this week
-		
-		res.jsonp users
+			res.jsonp peopletoremind
 
+exports.show = (req, res) ->
+	timesheet = req.timesheet
+	res.jsonp timesheet
 
 exports.timesheet = (req, res, next, id) ->
 	Timesheet.findOne(_id: id).exec (err, timesheet) ->

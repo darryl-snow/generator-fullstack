@@ -55,7 +55,6 @@ angular.module('iproferoApp')
 				editing: project.editing
 
 		$scope.cancelEdit = ->
-			console.log "cancelled"
 			for project in $scope.projects
 				project.editing = false
 				project.swiped = false
@@ -69,7 +68,7 @@ angular.module('iproferoApp')
 			project.$remove (response) ->
 				if response.$resolved
 					
-					$notification.warning("undo?", "Removed " + tmp.name)
+					$notification.warning("success", "Removed " + tmp.name)
 
 					if $scope.projects?
 						$scope.projects =

@@ -4,7 +4,7 @@
 
 	.panel
 		ul.projects
-			li.project(data-ng-repeat="project in projects", data-ng-click="toggleSwipe(project)", data-ng-swipe-left="swipeLeft(project)", data-ng-swipe-right="swipeRight(project)", data-ng-class="{'swiped':project.swiped, 'editing':project.editing}")
+			li.project(data-ng-repeat="project in projects | orderBy: 'name'", data-ng-click="toggleSwipe(project)", data-ng-swipe-left="swipeLeft(project)", data-ng-swipe-right="swipeRight(project)", data-ng-class="{'swiped':project.swiped, 'editing':project.editing}")
 				span(data-ng-bind="project.name")
 				a.floated.right.delete(data-ng-click="deleteproject(project)")
 					i.cross.icon
@@ -16,4 +16,5 @@
 			input(type="text", placeholder="New Project", data-ng-model="newproject.name", autofocus)
 			button(data-ng-click="addproject()", data-ng-class="{'edit':newproject.editing}")
 				i.icon(data-ng-class="{'plus':!newproject.editing, 'pencil':newproject.editing}")
+
 notifications

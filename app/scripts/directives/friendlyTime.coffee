@@ -16,26 +16,26 @@ angular.module('iproferoApp')
 
 			write = ->
 
-				number = ngModelCtrl.$modelValue
+				if ngModelCtrl.$modelValue?
+					number = ngModelCtrl.$modelValue.toString()
 
-				if !number.match(/^[0-9][0-9]?(hrs)(\s[0-9][0-9](mins))?/g)
+					if !number.match(/^[0-9][0-9]?(hrs)(\s[0-9][0-9](mins))?$/g)
 
-					if number % 1 isnt 0
-						hours = number - (number % 1) + "hrs "
-						minutes = (number % 1) * 60 + "mins"
-						time = hours + minutes
-					else
-						time = number + "hrs"
+						if number % 1 isnt 0
+							hours = number - (number % 1) + "hrs "
+							minutes = (number % 1) * 60 + "mins"
+							time = hours + minutes
+						else
+							time = number + "hrs"
 
-					# write to input val
-				else number
+					else number
 
 			read = ->
 
 				number = $(element).val()
 
 				# see if it's already friendly formatted
-				if !number.match(/^[0-9][0-9]?(hrs)(\s[0-9][0-9](mins))?/g)
+				if !number.match(/^[0-9][0-9]?(hrs)(\s[0-9][0-9](mins))?$/g)
 
 					# ensure it's a number
 					clean = number.replace(/[^0-9,.]+/g, "")

@@ -3,11 +3,9 @@ Schema = mongoose.Schema
 
 ActivitySchema = new Schema(
 	name: String
-	hourlyrate: Number
-	dailyrate: Number
-	agency: String
 	parent: String
 	children: [String]
+	agency: String
 )
 
 # Ensure name is present

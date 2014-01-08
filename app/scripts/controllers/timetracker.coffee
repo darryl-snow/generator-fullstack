@@ -1,17 +1,23 @@
 'use strict'
 
 angular.module('iproferoApp')
-	.controller 'TimetrackerCtrl', ['$scope', '$http', 'localStorageService', 'Project', 'Activity', 'Timesheet', '$rootScope', '$notification', ($scope, $http, localStorageService, Project, Activity, Timesheet, $rootScope, $notification) ->
+	.controller 'TimetrackerCtrl', ['$scope', '$http', 'localStorageService', 'Project', 'Activity', 'Timesheet', '$rootScope', '$notification', '$routeParams', '$location', ($scope, $http, localStorageService, Project, Activity, Timesheet, $rootScope, $notification, $routeParams, $location) ->
 
 		$scope.timesheets = [];
 		$scope.user = $rootScope.currentUser
+		$scope.loading = false
+
+		if $routeParams.id?
+			$scope.editing = $routeParams.id
 
 		# Setup date picker options
 		$scope.dateformat = "DD/MM/YYYY"
+
 		$scope.dateranges =
 			'Today': [moment(), moment()]
 			'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)]
 			'Past 5 Days': [moment().subtract('days', 4), moment()]
+			'Last Week': [moment().subtract(1, 'week').subtract('days',moment().subtract(1, 'week').day()-1), moment().subtract(1, 'week').subtract('days',moment().subtract(1, 'week').day()-1).add('days', 4)]
 
 		# if today is tuesday then "today" and "yesterday" are fine
 		# if today is weds-friday, then also need to add previous
@@ -55,7 +61,27 @@ angular.module('iproferoApp')
 		# Setup new timesheet, getting data from LS if it's there
 		# or otherwise using default values
 		$scope.date = "Today"
-		if localStorageService.get('timesheet')?
+		if $scope.editing?
+
+			Timesheet.get
+				timesheetId: $scope.editing
+			, (timesheet) ->
+
+				$scope.editing = timesheet
+
+				$scope.newtimesheet =
+					time: timesheet.duration.toString()
+					date:
+						from: moment(timesheet.date)
+						to: moment(timesheet.date)
+					project: timesheet.project
+					activity: timesheet.activity
+					comment: timesheet.comment
+
+				$scope.changedate($scope.newtimesheet.date.from, $scope.newtimesheet.date.to)
+				$scope.validate()
+
+		else if localStorageService.get('timesheet')
 
 			$scope.newtimesheet =
 				time: localStorageService.get('timesheet').time
@@ -84,7 +110,8 @@ angular.module('iproferoApp')
 
 		# validate input
 		$scope.validate = ->
-			$scope.checkTime() and $scope.checkDate() and $scope.checkProject()
+			if $scope.newtimesheet?
+				$scope.checkTime() and $scope.checkDate() and $scope.checkProject()
 
 		$scope.checkTime = ->
 			$scope.newtimesheet.time isnt 'undefined' and $scope.getHours() > 0
@@ -93,8 +120,9 @@ angular.module('iproferoApp')
 			$scope.validDate
 
 		$scope.getHours = ->
-			if $scope.newtimesheet.time?
-				time = $scope.newtimesheet.time.split(" ")
+			if $scope.newtimesheet.time? and $scope.newtimesheet.time != ""
+				time = $scope.newtimesheet.time.toString()
+				time = time.split(" ")
 				if time.length > 1
 					hours = time[0].replace("hrs", "")
 					minutes = time[1].replace("mins", "") / 60
@@ -179,7 +207,8 @@ angular.module('iproferoApp')
 					from: from
 					to: to
 
-				$scope.$apply()
+				if !$scope.$$phase
+					$scope.$apply()
 
 		$scope.$watch "newtimesheet.time + newtimesheet.date.from + newtimesheet.project", ->
 			$scope.valid = $scope.validate()
@@ -188,45 +217,43 @@ angular.module('iproferoApp')
 
 			if $scope.validate()
 
-				localStorageService.add('timesheet', $scope.newtimesheet)
+				$scope.loading = true
 
-				if $scope.newtimesheet.date.from.isSame($scope.newtimesheet.date.to)
+				if $scope.editing?
+					
+					$scope.editing.date = moment($scope.newtimesheet.date.from, $scope.dateformat).local().toISOString()
+					$scope.editing.duration = $scope.getHours()
+					$scope.editing.project = $scope.newtimesheet.project
+					$scope.editing.comment = $scope.newtimesheet.comment
+					$scope.editing.activity = $scope.newtimesheet.activity
 
-					newdata = new Timesheet
-						date: moment($scope.newtimesheet.date.from, $scope.dateformat).local().toISOString()
-						duration: $scope.getHours()
-						project: $scope.newtimesheet.project._id
-						user: $scope.user._id
-						comment: $scope.newtimesheet.comment
-						activity: $scope.newtimesheet.activity._id
-						agency: $scope.user.agency
-
-					newdata.$save (response) ->
+					$scope.editing.$update (response) ->
 
 						if !response.errors?
-							# timesheet saved successfully, add to list
-							$scope.addTimesheet(response)
-							$scope.cleartime()
-							$notification.success("success", "Saved")
+							$notification.success("success", "Updated")
+							$scope.loading = false
+							$location.path "/timesheets"
 						else
 							console.log response.errors.name.message
 							$notification.error("failed", response.errors.name.message)
+							$scope.loading = false
 
 				else
 
-					# we have a range of dates so create a new timesheet for each
-					
-					days = $scope.newtimesheet.date.to.diff($scope.newtimesheet.date.from, 'days')
-					for n in [0..days]
+					localStorageService.add('timesheet', $scope.newtimesheet)
+
+					if $scope.newtimesheet.date.from.isSame($scope.newtimesheet.date.to)
 
 						newdata = new Timesheet
-							date: moment($scope.newtimesheet.date.from, $scope.dateformat).add(n, 'days').local().toISOString()
+							date: moment($scope.newtimesheet.date.from, $scope.dateformat).local().toISOString()
 							duration: $scope.getHours()
-							project: $scope.newtimesheet.project._id
+							project: $scope.newtimesheet.project
 							user: $scope.user._id
 							comment: $scope.newtimesheet.comment
-							activity: $scope.newtimesheet.activity._id
+							activity: $scope.newtimesheet.activity
 							agency: $scope.user.agency
+
+						$scope.loading = false
 
 						newdata.$save (response) ->
 
@@ -235,13 +262,47 @@ angular.module('iproferoApp')
 								$scope.addTimesheet(response)
 								$scope.cleartime()
 								$notification.success("success", "Saved")
+								$scope.loading = false
 							else
 								console.log response.errors.name.message
 								$notification.error("failed", response.errors.name.message)
+								$scope.loading = false
+
+					else
+
+						# we have a range of dates so create a new timesheet for each
+						# being careful to avoid weekends (which probably aren't workdays)
+
+						days = $scope.newtimesheet.date.to.diff($scope.newtimesheet.date.from, 'days')
+						for n in [0..days]
+
+							date = moment($scope.newtimesheet.date.from, $scope.dateformat).add(n, 'days').local()
+							if date.day() isnt 0 and date.day() isnt 6
+
+								newdata = new Timesheet
+									date: date.toISOString()
+									duration: $scope.getHours()
+									project: $scope.newtimesheet.project
+									user: $scope.user._id
+									comment: $scope.newtimesheet.comment
+									activity: $scope.newtimesheet.activity
+									agency: $scope.user.agency
+
+								newdata.$save (response) ->
+
+									if !response.errors?
+										# timesheet saved successfully, add to list
+										$scope.addTimesheet(response)
+										$scope.cleartime()
+										$notification.success("success", "Saved")
+										$scope.loading = false
+									else
+										console.log response.errors.name.message
+										$notification.error("failed", response.errors.name.message)
+										$scope.loading = false
 
 			else
 				console.log "Missing or invalid timesheet data"
-				console.log $scope.newtimesheet
 				$notification.error("failed", "Missing or invalid timesheet data")
 
 		$scope.cleartime = ->
@@ -253,8 +314,6 @@ angular.module('iproferoApp')
 				project: ""
 
 		$scope.addTimesheet = (timesheet) ->
-			timesheet.projectname = $scope.newtimesheet.project.name
-			timesheet.activityname = $scope.newtimesheet.activity.name
 			$scope.timesheets.push timesheet
 
 	]

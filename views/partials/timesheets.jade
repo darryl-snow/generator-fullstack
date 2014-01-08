@@ -1,9 +1,27 @@
-.container(data-ng-init="find()")
+.container(data-ng-init="find()", on-escape="cancelEdit()", global)
 
 	h3.centre.aligned Timesheets
+	.one.whole.centre.aligned
+		a.small(href="/")
+			i.left.clock.icon
+			| log new timesheet
 
-	ul.timesheets
+	ul.timesheetdays
 		li(data-ng-repeat="timesheet in timesheets | orderBy:'date':reverse=true")
-			h4(data-ng-bind="timesheet.date | date:'EEE d MMM'")
-			span.left.floated(data-ng-bind="timesheet.projectname")
-			span.right.floated {{timesheet.duration}} hrs
+			h4.blue
+				i.left.clock.icon
+				span(data-ng-bind="timesheet.date | timesheetDate")
+			ul.timesheets
+				li(data-ng-repeat="sheet in timesheet.timesheets", data-ng-click="toggleSwipe(sheet)", data-ng-swipe-left="swipeLeft(sheet)", data-ng-swipe-right="swipeRight(sheet)", data-ng-class="{'swiped':sheet.swiped}")
+					.group
+						h5
+							span(data-ng-bind="sheet.project.name")
+							span.right.floated(data-ng-bind="sheet.duration | friendlyTime")
+						span.left.floated(data-ng-bind="sheet.activity.name")
+						span(data-ng-if="sheet.comment")
+							| : 
+							span.small(data-ng-bind="sheet.comment")
+						a.floated.right.delete(data-ng-click="deletetimesheet(sheet)")
+							i.cross.icon
+						a.floated.right.edit(href="/timesheets/{{sheet.id}}/edit")
+							i.pencil.icon

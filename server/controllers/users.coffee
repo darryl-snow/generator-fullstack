@@ -42,11 +42,12 @@ exports.everyone = (req, res) ->
 
 # Show single user profile
 exports.show = (req, res) ->
-	if req.profile._id is req.user._id or (req.profile.agency is req.user.agency and (req.user.role is "admin" or req.user.role is "superuser"))
+	if req.profile._id.toString() is req.user._id.toString() or (req.profile.agency is req.user.agency and (req.user.role is "admin" or req.user.role is "superuser"))
 		user = req.profile
 		res.jsonp user
 	else
 		user =
+			_id: req.profile._id
 			name: req.profile.name
 			email: req.profile.email
 			username: req.profile.username

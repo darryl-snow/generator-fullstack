@@ -48,6 +48,7 @@ module.exports = (app, passport) ->
 	# Activity Routes
 	app.post "/api/" + config.apiversion + "/agencies/:agencyId/activities", auth.requiresLogin, auth.user.isAgencyAdmin, activities.create
 	app.get "/api/" + config.apiversion + "/agencies/:agencyId/activities", auth.requiresLogin, auth.user.isInAgency, activities.all
+	app.get "/api/" + config.apiversion + "/agencies/:agencyId/activities/:activityId", auth.requiresLogin, auth.user.isInAgency, activities.show
 	app.put "/api/" + config.apiversion + "/agencies/:agencyId/activities/:activityId", auth.requiresLogin, auth.user.isAgencyAdmin, activities.update
 	app.del "/api/" + config.apiversion + "/agencies/:agencyId/activities/:activityId", auth.requiresLogin, auth.user.isAgencyAdmin, activities.remove
 	app.param "activityId", activities.activity
@@ -67,6 +68,7 @@ module.exports = (app, passport) ->
 	app.get "/api/" + config.apiversion + "/agencies/:agencyId/timesheets", auth.requiresLogin, auth.user.isAgencyAdmin, timesheets.forAgency
 	app.put "/api/" + config.apiversion + "/timesheets/:timesheetId", auth.requiresLogin, auth.user.hasAuthorisation, timesheets.update
 	app.del "/api/" + config.apiversion + "/timesheets/:timesheetId", auth.requiresLogin, auth.user.hasAuthorisation, timesheets.remove
+	app.get "/api/" + config.apiversion + "/timesheets/:timesheetId", auth.requiresLogin, auth.user.hasAuthorisation, timesheets.show
 	app.get "/api/" + config.apiversion + "/timesheets/peopletoremind", auth.requiresLogin, timesheets.peopletoremind
 	app.param "timesheetId", timesheets.timesheet
 

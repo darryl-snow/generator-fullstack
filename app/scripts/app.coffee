@@ -31,9 +31,12 @@ angular.module('iproferoApp', [
 			.when '/projects',
 				templateUrl: 'partials/projects'
 				controller: 'ProjectsCtrl'
-			.when '/timesheets/report',
+			.when '/timesheets',
 				templateUrl: 'partials/timesheets'
 				controller: 'TimesheetsCtrl'
+			.when '/timesheets/:id/edit',
+				templateUrl: 'partials/editTimesheet'
+				controller: 'EditTimesheetCtrl'
 			.when '/activities',
 				templateUrl: 'partials/activities'
 				controller: 'ActivitiesCtrl'
@@ -58,4 +61,15 @@ angular.module('iproferoApp', [
 		$rootScope.$on 'event:auth-loginRequired', ->
 			$location.path '/login'
 			false
+
+		routesThatRequireAdmin = [
+			'/activities'
+		]
+
+		checkAdmin = (route) ->
+			route in routesThatRequireAdmin
+
+		$rootScope.$on "$routeChangeStart", (event, next, current) ->
+			if $rootScope.currentUser?
+				$location.path "/" if not checkAdmin($location.url()) and not ($rootScope.currentUser.role isnt "admin" or $rootScope.currentUser.role isnt "superuser")
 	]

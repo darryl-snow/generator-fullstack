@@ -55,7 +55,7 @@ angular.module('iproferoApp')
 				console.log person
 				$scope.agency.$update (response) ->
 					person.$update (response) ->
-						$notification.warning("undo?", "Removed " + person.email)
+						$notification.warning("success", "Removed " + person.email)
 						$scope.getpeople()
 			$scope.cancelSwipe()
 
@@ -86,7 +86,7 @@ angular.module('iproferoApp')
 					if response.$resolved
 						if !response.errors?
 							$scope.closedialog()
-							$notification.warning("undo?", "Removed " + tmp.name)
+							$notification.warning("success", "Removed " + tmp.name)
 							me = Auth.currentUser()
 							me.agency = ""
 							me.$update (response) ->

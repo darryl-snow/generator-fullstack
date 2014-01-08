@@ -19,7 +19,7 @@ require("./server/db")
 require("./server/authentication") passport
 
 # Emails
-require("./server/emails")
+# require("./server/emails")
 
 # Routes
 routes = require("./server/routes") app, passport

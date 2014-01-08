@@ -60,5 +60,37 @@
 	group()
 	overflow 					visible
 
-.newproject
+	&.back
+		background 				dark-blue
+		color 					white
+		opacity 				0
+
+.newproject,
+.newactivity
 	margin-top 					1em
+
+.flip
+	@extend 					.animated.slow
+	backface-visibility			hidden
+	position 					absolute
+	transform-origin			50% 50% 0px
+	width 						100%
+
+.flip-side-1
+	-webkit-transform rotateY( 0deg ) !important
+	-moz-transform rotateY( 0deg ) !important
+	-ms-transform rotateY( 0deg ) !important
+	-o-transform rotateY( 0deg ) !important
+	transform rotateY( 0deg ) !important
+	z-index 					2
+
+	&.back
+		opacity 				1
+
+.flip-side-2
+	-webkit-transform rotateY( 180deg ) !important
+	-moz-transform rotateY( 180deg ) !important
+	-ms-transform rotateY( 180deg ) !important
+	-o-transform rotateY( 180deg ) !important
+	transform rotateY( 180deg ) !important
+	pointer-events 				none

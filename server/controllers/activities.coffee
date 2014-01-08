@@ -24,6 +24,10 @@ exports.all = (req, res) ->
 						name: activity.name
 				res.jsonp data
 
+exports.show = (req, res) ->
+	activity = req.activity
+	res.jsonp activity
+
 exports.update = (req, res) ->
 	activity = req.activity
 	activity = _.extend(activity, req.body)

@@ -1,5 +1,6 @@
 nodemailer = require("nodemailer")
 schedule = require("node-schedule")
+timesheets = require("./controllers/timesheets")
 
 smtpTransport = nodemailer.createTransport "SMTP",
 	service: "Gmail"
@@ -9,7 +10,7 @@ smtpTransport = nodemailer.createTransport "SMTP",
 
 mailOptions =
 	from: "Organisr.io <no-reply@organisr.io>"
-	to: "darryl.snow@profero.com"
+	to: timesheets.peopletoremind
 	subject: "This is a test"
 	html: "<body style='background:#ffffff;color:#333333;padding:30px;text-align:center;'><h1>Busy?</h1><h3>It looks like you haven't submitted any timesheets yet this week</h3><p>To log in to organisr.io, click the button below:</p><a style='background-color:#314559; color:#ffffff; margin: 20px auto; display:block; padding: 10px 20px; font-size: 13px; font-weight: bold; text-decoration: none; cursor: pointer;'>submit timesheets</a></body>"
 

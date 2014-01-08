@@ -26,6 +26,7 @@ angular.module('iproferoApp')
 				email: $scope.user.email
 				username: $scope.user.username
 				password: $scope.user.password
+				role: "user"
 			, (err) ->
 				$scope.errors = {}
 				unless err

@@ -9,7 +9,7 @@ angular.module('iproferoApp')
 			icon: "gauge"
 		,
 			title: "Timesheets"
-			link: "/timesheets/report"
+			link: "/timesheets"
 			icon: "clock"
 		,
 			title: "Projects"
