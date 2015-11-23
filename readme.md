@@ -1,6 +1,5 @@
 #Organisr.io
 _who knows what it should be called? :p_
-&copy; Profero 2014
 
 [Open the app](http://proferotech.heroku.com)
 
