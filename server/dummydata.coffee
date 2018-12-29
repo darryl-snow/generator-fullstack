@@ -25,12 +25,6 @@ User.find({}).remove ->
 		password: "password"
 		role: "admin"
 	,
-		name: "Julien Buty"
-		email: "julien.buty@profero.com"
-		username: "julienbuty"
-		password: "password"
-		role: "admin"
-	,
 		name: "Edward Hutchins"
 		email: "edward.hutchins@profero.com"
 		username: "edwardhutchins"
