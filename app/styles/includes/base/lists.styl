@@ -1,0 +1,220 @@
+// Lists
+// 
+// Styles for lists
+//
+// .class - description
+//
+// Markup:
+// <ul class="list {$modifiers}">
+// 	<li>First</li>
+// 	<li>Second</li>
+// 	<li>Third</li>
+// </ul>
+// <ol class="list {$modifiers}">
+// 	<li>First</li>
+// 	<li>Second</li>
+// 	<li>Third</li>
+// </ol>
+// <dl class="list {$modifiers}">
+// 	<dt>First Term</dt>
+// 		<dd>Definition</dd>
+// 	<dt>Second Term</dt>
+// 		<dd>Definition</dd>
+// 	<dt>Third Term</dt>
+// 		<dd>Definition</dd>
+// </dl>
+//
+// Styleguide 1.6
+
+.unstyled-list
+	list-style 				none
+	margin 					0
+	padding 				0
+
+		li
+			margin 			0
+			padding 		0
+
+.inline-list
+	li
+		display 			inline-block
+
+.timesheetdays
+	@extend 				.unstyled-list
+	list-style 				none
+	margin 					0
+	padding 				0
+
+	li
+		margin 				0
+		padding 			0
+
+.timesheets
+	float 					none
+	list-style 				none
+	margin 					0 0 1em
+	padding 				0
+
+	li
+		@extend 			.animated.fast
+		background 			rgba(white, 0.5)
+		cursor 				pointer
+		padding 			1em
+		position 			relative
+		margin 				0 0 0.2em 0
+		overflow 			hidden
+		group()
+
+		&:hover
+			background 		rgba(white, 0.8)
+
+			a
+				opacity 	0.7
+
+		a
+			@extend 		.animated.fast
+			bottom 			0
+			color 			white
+			display 		block
+			line-height 	5
+			margin-right 	-7em
+			opacity 		0.5
+			padding 		0 1em
+			position 		absolute
+			right 			0
+			top 			0
+			width 			1em
+
+			&.edit
+				background 	green
+				right 		3em
+
+			&.delete
+				background 	red
+
+			&:active,
+			&:focus,
+			&:hover
+				opacity 	1
+
+		&.swiped
+			color 			lighten(textcolour, 40%)
+			padding-right 	7em
+
+			a
+				@extend 	.animated.fast
+				margin-right 	0
+
+	h5
+		margin-top 			0
+		margin-bottom 		0.5em
+
+.projects,
+.activities
+	@extend 				.unstyled-list
+	padding 				0
+
+.project,
+.activity
+	border-bottom 			1px solid light-grey
+	cursor 					pointer
+	line-height 			3em
+	overflow 				hidden
+	padding 				0 0 0 1em
+
+	a
+		@extend 			.animated.fast
+		color 				white
+		display 			block
+		margin-right 		-4em
+		opacity 			0.7
+		padding 			0 1em
+		width 				1em
+
+		&.edit
+			background 		green
+
+		&.delete
+			background 		red
+
+	&:hover
+		@extend 			.animated.fast
+		background 			lighten(light-grey, 60%)
+
+		a
+			opacity 		1
+
+	&:last-of-type
+		border-bottom 		none
+
+	&.swiped
+		color 				lighten(textcolour, 40%)
+
+		a
+			@extend 		.animated.fast
+			margin-right 	0
+
+	&.editing
+		opacity 			0.3
+
+// .activities
+// 	@extend 				.unstyled-list
+// 	margin-bottom 			1em
+// 	padding 				0
+
+// 	li
+// 		@extend 			.animated.fast
+// 		background 			rgba(white, 0.5)
+// 		margin-bottom 		0.2em
+// 		padding 			0.5em
+
+// 		group()
+
+// 		&.titles
+// 			color 			grey
+// 			font-size 		0.8em
+// 			font-weight 	700
+// 			margin-bottom 	0.25em
+// 			text-transform 	uppercase
+
+// 		&:hover
+// 			background 		rgba(white, 0.8)
+
+.people
+	@extend 				.unstyled-list
+	font-size 				0.8em
+	padding 				0
+
+	li
+		border-bottom 		1px solid light-grey
+		cursor 				pointer
+		line-height 		3em
+		overflow 			hidden
+		padding 			0 0 0 1em
+
+		&:last-of-type
+			border-bottom 	none
+
+		a
+			@extend 			.animated.fast
+			color 				white
+			display 			block
+			margin-right 		-4em
+			opacity 			0.7
+			padding 			0 1em
+			width 				1em
+
+			&.delete
+				background 		red
+
+		&:hover
+			a
+				opacity 		1
+
+		&.swiped
+
+			color 				lighten(textcolour, 40%)
+
+			a
+				@extend 		.animated.fast
+				margin-right 	0

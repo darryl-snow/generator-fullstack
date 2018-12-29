@@ -1,0 +1,164 @@
+// Side Menu
+// 
+// Styles for the side menu
+//
+// .class - description
+//
+// Markup:
+// <nav class="{modifiers}">
+// 	<ul>
+// 		<li><a href="/">Item 1</a></li>
+// 		<li><a href="/">Item 2</a></li>
+// 		<li><a href="/">Item 3</a></li>
+// 	</ul>
+// </nav>
+//
+// Styleguide 2.7
+
+.sidebar
+	/* Default Settings */
+	display													none
+	position												absolute
+	position												fixed
+	top														0
+	height													100%
+	z-index													999999
+	width													260px
+	overflow-x												none
+	overflow-y												auto
+
+	.sidr-inner
+		padding												0 0 spacing
+
+		> p
+			margin-left										spacing
+			margin-right									spacing
+
+	&.left
+		left												-260px
+		right												auto
+
+	/* Theme Settings */
+	font-size												1.2em
+	background												dark-blue
+	color													blue-grey
+
+	p
+		font-size											0.8em
+		margin												0 0 spacing
+		a
+			color											rgba(blue-grey, .9)
+
+	> p
+		margin-left											spacing
+		margin-right										spacing
+
+	ul
+		display												block
+		margin												0
+		padding												0
+		border-bottom										1px solid lighten(dark-blue, 10%)
+
+		li
+			display											block
+			margin											0
+			border-top										1px solid lighten(dark-blue, 10%)
+			border-bottom									1px solid darken(dark-blue, 10%)
+
+			&:first-of-type
+				border-top 									1px solid transparent
+
+			&:hover,
+			&.active,
+			&.active
+				border-top									1px solid transparent
+
+				a
+					background-color 						darken(dark-blue, 10%)
+					color 									white
+
+			a, span
+				padding										1em
+				display										block
+				text-decoration								none
+				color										blue-grey
+
+				&:active,
+				&:focus,
+				&:hover
+					background-color 						darken(dark-blue, 10%)
+					color 									white
+
+			ul
+				border-bottom								none
+				margin										0
+				li
+					font-size								0.8em
+
+					&:last-child
+						border-bottom						none
+
+					&:hover,
+					&.active,
+					&.sidr-class-active
+						border-top							none
+						line-height							2em
+
+					a, span
+						color								rgba(blue-grey, .8)
+						padding-left						2em
+	form
+		margin												0 spacing
+
+	label
+		font-size											0.8em
+
+	input[type="text"],
+	input[type="password"],
+	input[type="date"],
+	input[type="datetime"],
+	input[type="email"],
+	input[type="number"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="time"],
+	input[type="url"],
+	textarea, select
+		width												100%
+		font-size											0.8em
+		padding												0.25em
+		box-sizing 											border-box
+		margin												0 0 0.7em
+		border-radius 										2px
+		border												none
+		background											rgba(black, .1)
+		color												rgba(blue-grey, .6)
+		display												block
+		clear												both
+
+	input[type=checkbox]
+		width												auto
+		display												inline
+		clear												none
+
+	input[type=button],
+	input[type=submit]
+		color												dark-blue
+		background											light-grey
+
+		&:hover
+			background										darken(dark-blue, 10%)
+
+	.logo
+		color 												white
+		padding 											1em
+
+		h2
+			font-size 										1.2em
+			margin 											0
+
+		img
+			height 											auto
+			margin-right 									0.5em
+			vertical-align 									middle
+			width 											1em

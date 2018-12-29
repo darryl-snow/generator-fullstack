@@ -1,0 +1,116 @@
+// Layout
+// 
+// Styles for layout
+//
+// .class - description
+//
+// Markup:
+// <div class="{$modifiers}"></div>
+//
+// Styleguide 1.4
+
+.left.floated
+	float 				left
+
+.right.floated
+	float 				right
+
+.centre.aligned
+	text-align 			center
+
+.left.aligned
+	text-align 			left
+
+.centred
+	display 			block
+	margin 				0 auto 1em
+
+.one.whole,
+.one.half,
+.one.third,
+.one.quarter,
+.five.twelfths,
+.one.sixth
+	column(12)
+	overflow 			visible
+	word-wrap 			break-word
+
+.one.half
+	@media small-device
+		column(6)
+		overflow 		visible
+
+.one.third
+	@media small-device
+		column(4)
+
+.list.third
+	column(4)
+
+.one.quarter
+	@media small-device
+		column(3)
+
+.five.twelfths
+	@media small-device
+		column(5)
+		overflow 		visible
+
+.one.sixth
+	@media small-device
+		column(2)
+		overflow 		visible
+
+.login.panel,
+.signup.panel
+	column(12)
+
+	@media small-device
+		column(6)
+		offset(3)
+
+.agency.panel
+	column(12)
+
+	@media small-device
+		column(8)
+		offset(2)
+
+.timetracker
+	column(12)
+	margin-bottom 		1em
+	overflow 			visible
+	position 			relative
+
+	@media small-device
+		column(6)
+		offset(3)
+		margin-bottom 	1em
+		overflow 		visible
+		position 		relative
+
+	@media medium-device
+		column(4)
+		offset(4)
+		margin-bottom 	1em
+		overflow 		visible
+		position 		relative
+
+.timesheets
+	column(12)
+	overflow 			visible
+
+.newproject input,
+.newactivity input
+	column(10)
+
+.newproject button,
+.newactivity button
+	column(2)
+
+.padded
+	box-sizing 			border-box
+	padding 			0.5em
+
+	input
+		margin 			0

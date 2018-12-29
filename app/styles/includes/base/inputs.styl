@@ -1,0 +1,68 @@
+// Form Inputs
+// 
+// Styles for form elements
+//
+// .class - description
+//
+// Markup:
+// <h1 class="header {$modifiers}">Header</h1>
+// <p class="paragraph {$modifiers}">Paragraph</p>
+//
+// Styleguide 1.9
+
+input,
+select,
+textarea
+	@extend 					.animated.fast
+	input(blue, 100%)
+	box-sizing 					border-box
+	margin-bottom 				1em
+	padding 					1em
+	position 					relative
+	-webkit-backface-visibility hidden
+
+	&:focus
+		@extend 				.animated.fast
+		border					1px solid blue
+		box-shadow				0 0 5px rgba(blue,0.7)
+
+.invalid
+	border 						1px solid red
+
+.error
+	background 					lighten(red, 80%)
+	border 						1px solid red
+	box-sizing 					border-box
+	color 						red
+	font-size 					0.8em
+	margin-top 					0
+	padding 					0.5em
+
+.icon.input
+	position 					relative
+
+	input
+		padding-left 			2em
+
+	.icon
+		left 					0
+		line-height 			3em
+		margin-left 			0.5em
+		opacity 				0.5
+		position 				absolute
+		top 					0
+
+	input:focus + .icon
+		opacity 				1
+		transition 				0.2s all ease-in
+
+.fadeout
+	opacity 					0.3
+
+textarea
+	height 						3.5em
+	line-height 				1em
+	resize 						vertical
+
+	&.expanded
+		height 					8em

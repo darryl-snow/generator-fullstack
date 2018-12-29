@@ -1,0 +1,40 @@
+// Links
+// 
+// Styles for links
+//
+// .class - description
+//
+// Markup:
+// <a href="/" class="link {$modifiers}">Link</a>
+//
+// Styleguide 1.5
+
+
+// .link
+	
+// 	&:active,
+// 	&:focus,
+// 	&:hover
+
+// etc.
+
+a
+	color 				blue
+	cursor 				pointer
+	text-decoration 	none
+	transition 			0.2s all ease-out
+
+	$:active,
+	&:focus,
+	&:hover,
+	.active
+		color 			darken(@color, 20%)
+		transition 		0.2s all ease-in
+
+.dropdown-toggle
+	cursor 				pointer
+
+	&:active,
+	&:focus,
+	&:hover
+		color 			blue

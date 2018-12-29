@@ -1,0 +1,96 @@
+// Blocks
+// 
+// Styles for block-level elements
+//
+// .class - description
+//
+// Markup:
+// <div class="{$modifiers}"></div>
+//
+// Styleguide 2.1
+
+
+// .header
+// .hero
+// .footer
+// etc.
+
+.hero
+	background 					blue
+	box-sizing 					border-box
+	color 						white
+	padding 					2em
+	group()
+
+	h1
+		font-size 				2.5em
+		margin 					0
+
+		@media small-device
+			font-size 			4em
+
+	input
+		border-color 			blue
+
+		&:focus
+			border-color 		dark-blue
+			box-shadow 			0 0 5px dark-blue
+
+	button:focus
+		background-color 		lighten(dark-blue, 10%)
+
+	a
+		color 					white
+
+		&:active,
+		&:focus,
+		&:hover
+			color 				white
+			text-decoration 	underline
+
+.panel
+	@extend 					.animated.fast
+	background 					white
+	box-shadow 					0 1px 2px rgba(black,0.1)
+	box-sizing 					border-box
+	max-width 					100%
+	padding 					1.5em
+	text-align 					left
+	word-wrap 					break-word
+	group()
+	overflow 					visible
+
+	&.back
+		background 				dark-blue
+		color 					white
+		opacity 				0
+
+.newproject,
+.newactivity
+	margin-top 					1em
+
+.flip
+	@extend 					.animated.slow
+	backface-visibility			hidden
+	position 					absolute
+	transform-origin			50% 50% 0px
+	width 						100%
+
+.flip-side-1
+	-webkit-transform rotateY( 0deg ) !important
+	-moz-transform rotateY( 0deg ) !important
+	-ms-transform rotateY( 0deg ) !important
+	-o-transform rotateY( 0deg ) !important
+	transform rotateY( 0deg ) !important
+	z-index 					2
+
+	&.back
+		opacity 				1
+
+.flip-side-2
+	-webkit-transform rotateY( 180deg ) !important
+	-moz-transform rotateY( 180deg ) !important
+	-ms-transform rotateY( 180deg ) !important
+	-o-transform rotateY( 180deg ) !important
+	transform rotateY( 180deg ) !important
+	pointer-events 				none

@@ -1,0 +1,30 @@
+.container(data-ng-init="find()")
+	.panel
+		h1(data-ng-bind="user.name")
+		table.table
+			tr
+				td name:
+				td
+					span(data-ng-bind="user.name", data-ng-show="user.name")
+					div(data-ng-show="!user.name")
+						input(type="text", data-ng-model="name", placeholder="Your name", on-enter="savename()", alphanumeric-input)
+			tr
+				td email:
+				td(data-ng-bind="user.email")
+			tr(data-ng-if="user.role!='user'")
+				td role:
+				td
+					select(data-ng-model="user.role", ui-select2)
+						option(value="user") user
+						option(value="manager") manager
+						option(value="admin") admin
+						option(value="superuser", data-ng-if="user.role=='superuser'") superuser
+			tr
+				td agency:
+				td {{agency.name || "No agency"}}
+
+		button.centred(data-ng-click="update()")
+			| save
+			i.right.disk.icon
+
+notifications

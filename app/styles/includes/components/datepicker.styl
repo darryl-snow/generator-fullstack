@@ -1,0 +1,226 @@
+/*!
+ * Stylesheet for the Date Range Picker, for use with Bootstrap 3.x
+ *
+ * Copyright 2013 Dan Grossman ( http://www.dangrossman.info )
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Built for http://www.improvely.com
+ */
+
+.daterangepicker.dropdown-menu
+	max-width						none
+	z-index							3000
+	group()
+
+.daterangepicker.opensleft .ranges,
+.daterangepicker.opensleft .calendar
+	// float							left
+
+.daterangepicker.opensright .ranges,
+.daterangepicker.opensright .calendar
+	// float							right
+
+.daterangepicker .ranges
+	margin							0.3em
+	text-align						center
+
+// .daterangepicker .ranges .range_inputs>div
+//	float							left
+
+.daterangepicker .ranges .range_inputs
+	display 						inline-block
+
+.daterangepicker_start_input,
+.daterangepicker_end_input
+	display 						inline-block
+
+.daterangepicker .ranges .range_inputs>div:nth-child(2)
+	padding-left					0.7em
+
+.daterangepicker .calendar
+	display							none
+	margin 							0.3em
+	// max-width						270px
+
+	&.shown
+		display 					inline-block !important
+
+.daterangepicker .calendar th,
+.daterangepicker .calendar td
+	font-family						'Helvetica Neue', Helvetica, Arial, sans-serif
+	white-space						nowrap
+	text-align						center
+	min-width						32px
+
+.daterangepicker .ranges label
+	color							textcolour
+	display							block
+	font-size						11px
+	font-weight						normal
+	height							20px
+	line-height						20px
+	margin-bottom					2px
+	text-shadow						white 1px 1px 0px
+	text-transform					uppercase
+	width							74px
+
+.daterangepicker .ranges input
+	font-size						11px
+
+.daterangepicker .ranges .input-mini
+	background-color				white
+	border							1px solid light-grey
+	border-radius					4px
+	color							textcolour
+	display							block
+	font-size						11px
+	height							30px
+	line-height						30px
+	vertical-align					middle
+	margin							0 0 10px 0
+	padding							0 6px
+	width							74px
+
+.daterangepicker .ranges ul
+	display 						inline-block
+	list-style						none
+	margin							0 1em 0 0
+	padding							0
+	vertical-align 					top
+
+.daterangepicker .ranges li
+	@extends 						.animated.fast
+	font-size						1em
+	background						lighter-grey
+	color							blue
+	padding							0.5em
+	margin-bottom					0.3em
+	border-radius					0.2em
+	cursor							pointer
+
+.daterangepicker .ranges li.active,
+.daterangepicker .ranges li:hover
+	@extends 						.animated.fast
+	background						blue
+	color							white
+
+.daterangepicker .calendar-date
+	border							1px solid #ddd
+	padding							4px
+	border-radius					4px
+	background						white
+
+.daterangepicker .calendar-time
+	text-align						center
+	margin							8px auto 0 auto
+	line-height						30px
+
+.daterangepicker
+	position						absolute
+	background						white
+	top								100px
+	left							20px
+	padding							4px
+	margin-top						1px
+
+.daterangepicker.opensleft:before
+	position						absolute
+	top								-7px
+	right							9px
+	display							inline-block
+	border-right					7px solid transparent
+	border-bottom					7px solid #ccc
+	border-left						7px solid transparent
+	border-bottom-color				rgba(0, 0, 0, 0.2)
+	content							''
+
+.daterangepicker.opensleft:after
+	position						absolute
+	top								-6px
+	right							10px
+	display							inline-block
+	border-right					6px solid transparent
+	border-bottom					6px solid white
+	border-left						6px solid transparent
+	content							''
+
+.daterangepicker.opensright:before
+	position						absolute
+	top								-7px
+	left							9px
+	display							inline-block
+	border-right					7px solid transparent
+	border-bottom					7px solid #ccc
+	border-left						7px solid transparent
+	border-bottom-color				rgba(0, 0, 0, 0.2)
+	content							''
+
+.daterangepicker.opensright:after
+	position						absolute
+	top								-6px
+	left							10px
+	display							inline-block
+	border-right					6px solid transparent
+	border-bottom					6px solid white
+	border-left						6px solid transparent
+	content							''
+
+.daterangepicker table
+	width							100% !important
+	margin							0 !important
+
+.daterangepicker td,
+.daterangepicker th
+	text-align						center !important
+	width							20px !important
+	height							20px !important
+	border-radius					0.2em !important
+	cursor							pointer !important
+	white-space						nowrap !important
+
+.daterangepicker td.off
+	color							#ccc !important
+
+.daterangepicker td.disabled
+	color							#ccc !important
+
+.daterangepicker td.available:hover,
+.daterangepicker th.available:hover
+	background						light-grey !important
+
+.daterangepicker td.in-range
+	background						lighten(blue, 80%) !important
+	border-radius					0 !important
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover
+	background-color				blue !important
+	border-color					transparent !important
+	color							white !important
+
+.daterangepicker td.week,
+.daterangepicker th.week
+	font-size						80% !important
+	color							#ccc !important
+
+.daterangepicker select.monthselect,
+.daterangepicker select.yearselect
+	font-size						0.8em !important
+	padding							1px !important
+	height							auto !important
+	margin							0 !important
+	cursor							default !important
+
+.daterangepicker select.monthselect
+	margin-right					2% !important
+	width							56% !important
+
+.daterangepicker select.yearselect
+	width							40% !important
+
+.daterangepicker select.hourselect,
+.daterangepicker select.minuteselect,
+.daterangepicker select.ampmselect
+	width							50px !important
+	margin-bottom					0 !important

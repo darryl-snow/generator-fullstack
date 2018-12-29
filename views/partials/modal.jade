@@ -1,0 +1,8 @@
+.modal
+	h1 Are you sure?
+	label(for="agencyname") Type the name of your agency to confirm:
+	input#agencyname(type="text", data-ng-model="agencyname", placeholder="Agency Name", autofocus)
+	button.delete(data-ng-class="{'disabled': !testforconfirmation()}", data-ng-click="removeagency()") delete agency
+	a(data-ng-click="closedialog()") or cancel
+	small NOTE: deleting your agency will clear all data pertaining to the agency. It cannot be undone!
+	.ngdialog-close(data-ng-click="closedialog()")

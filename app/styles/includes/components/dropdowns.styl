@@ -1,0 +1,156 @@
+// Dropdowns
+// 
+// Styles for dropown menus
+//
+// .class - description
+//
+// Markup:
+// <nav class="{modifiers}">
+// 	<ul>
+// 		<li><a href="/">Item 1</a></li>
+// 		<li><a href="/">Item 2</a></li>
+// 		<li><a href="/">Item 3</a></li>
+// 	</ul>
+// </nav>
+//
+// Styleguide 2.8
+
+
+// Dropdown arrow/caret
+.caret
+	display					inline-block
+	width					0
+	height					0
+	margin-left				2px
+	vertical-align			middle
+	border-top				textcolour solid
+	border-right			textcolour solid transparent
+	border-left				textcolour solid transparent
+
+// The dropdown wrapper (div)
+.dropdown
+	position 				relative
+
+// Prevent the focus on the dropdown toggle when closing dropdowns
+.dropdown-toggle:focus
+	outline 				0
+
+.tt-dropdown-menu
+	margin-top 				-1em !important
+	width 					100%
+
+.tt-suggestion
+	padding 				0.5em
+
+.tt-suggestion.tt-is-under-cursor
+	background 				lighter-grey
+
+// The dropdown menu (ul)
+.dropdown-menu,
+.tt-dropdown-menu
+	background-clip			padding-box
+	background-color		white
+	border					1px solid light-grey
+	box-shadow				0 1px 1px rgba(black,.25)
+	display					none
+	font-size				1em
+	list-style				none
+	margin					0
+	min-width				160px
+	padding					0
+	position				absolute
+	right 					0
+	top						100%
+	z-index					100
+
+	// Aligns the dropdown menu to right
+	&.pull-right
+		left 				auto
+		right 				0
+
+	// Links within the dropdown menu
+	> li > a
+		clear				both
+		color				textcolour
+		display				block
+		font-weight			normal
+		padding				0.7em 1em
+		white-space			nowrap
+
+.dropdown-menu > li,
+.tt-dropdown-menu > li
+	display 				block !important
+	padding 				0
+
+// Hover/Focus state
+.dropdown-menu > li > a
+	&:hover,
+	&:focus,
+	.active
+		background-color 	lighten(lighter-grey, 80%)
+		color 				blue
+		text-decoration		none
+
+// Active state
+.dropdown-menu > .active > a
+	&,
+	&:hover,
+	&:focus,
+	.active
+		background-color	lighten(lighter-grey, 80%)
+		color 				blue
+		outline 			0
+		text-decoration 	none
+
+// Disabled state
+// Gray out text and ensure the hover/focus state remains gray
+
+.dropdown-menu > .disabled > a
+	&,
+	&:hover,
+	&:focus
+		color 				light-grey
+
+// Nuke hover/focus effects
+.dropdown-menu > .disabled > a
+	&:hover,
+	&:focus
+		background-color 	transparent
+		background-image 	none
+		cursor				not-allowed
+		text-decoration 	none
+
+// Open state for the dropdown
+.dropdown.open
+	// Show the menu
+	> .dropdown-menu
+		display 			block
+
+	// Remove the outline when :focus is triggered
+	> a
+		outline 			0
+
+// Menu positioning
+.dropdown-menu.right
+	left					auto
+	right					0
+
+.dropdown-menu.left
+	left					0
+	right					auto
+
+// Dropdown section headers
+.dropdown-header
+	color					textcolour
+	display					block
+	font-size				0.8em
+	padding					0.2em 1.2em
+	
+// Backdrop to catch body clicks on mobile, etc.
+.dropdown-backdrop
+	bottom					0
+	left					0
+	position				fixed
+	right					0
+	top						0
+	z-index					90

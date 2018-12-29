@@ -1,0 +1,22 @@
+ ✔ list existing timesheets @done (14-01-07 19:42)
+   ✔ group by day @done (14-01-07 12:34)
+   ✔ allow users to edit in line @done (14-01-07 19:42)
+   ✔ allow users to delete @done (14-01-07 19:42)
+ ☐ faster DB connection?
+ ☐ put on bitbucket
+ ☐ activities page like projects page
+ ☐ logo
+ ☐ run server using forever
+ ☐ rate card page
+ ☐ reports page
+   ☐ google charts api - histogram - time range against user/project
+   ☐ tabulate data
+   ☐ export csv
+ ☐ reminder emails
+ ☐ agency settings page
+ ☐ undo
+
+
+
+ ☐ forever
+ ☐ fab for deployment

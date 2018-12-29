@@ -1,0 +1,132 @@
+doctype html
+// [if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+// [if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]
+// [if IE 8]><html class="no-js lt-ie9"> <![endif]
+// [if gt IE 8]><!
+html.no-js
+	//<![endif]
+	head
+		meta(charset="utf-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+		base(href="/")
+		title Organisr.io
+		meta(name="description", content="Organisr.io is a toolkit for keeping a small business organised")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		// Place favicon.ico and apple-touch-icon.png in the root directory
+		
+		<!-- build:css({.tmp,app}) styles/main.css -->
+		<link rel="stylesheet" href="styles/main.css">
+		<!-- endbuild -->
+
+		link(rel="apple-touch-icon", sizes="57x57", href="apple-touch-icon-57x57.png")
+		link(rel="apple-touch-icon", sizes="114x114", href="apple-touch-icon-114x114.png")
+		link(rel="apple-touch-icon", sizes="72x72", href="apple-touch-icon-72x72.png")
+		link(rel="apple-touch-icon", sizes="144x144", href="apple-touch-icon-144x144.png")
+		link(rel="apple-touch-icon", sizes="60x60", href="apple-touch-icon-60x60.png")
+		link(rel="apple-touch-icon", sizes="120x120", href="apple-touch-icon-120x120.png")
+		link(rel="apple-touch-icon", sizes="76x76", href="apple-touch-icon-76x76.png")
+		link(rel="apple-touch-icon", sizes="152x152", href="apple-touch-icon-152x152.png")
+		link(rel="icon", type="image/png", href="favicon-16x16.png", sizes="16x16")
+		link(rel="icon", type="image/png", href="favicon-32x32.png", sizes="32x32")
+		link(rel="icon", type="image/png", href="favicon-96x96.png", sizes="96x96")
+		link(rel="icon", type="image/png", href="favicon-160x160.png", sizes="160x160")
+		meta(name="msapplication-TileColor", content="#3498db")
+		meta(name="msapplication-TileImage", content="mstile-144x144.png")
+
+		meta(name='og:title', content='Organisr.io')
+		meta(name='og:image', content='favicon-160x160.png')
+		meta(name='og:url', content='http://organisr.io')
+
+	//- build:head
+
+	body(data-ng-app="iproferoApp")
+		//[if lt IE 7]>
+			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+			<![endif]
+		//[if lt IE 9]>
+			<script src="bower_components/es5-shim/es5-shim.js"></script>
+			<script src="bower_components/json3/lib/json3.min.js"></script>
+			<![endif]
+
+		div(data-ng-include="", src="'partials/navbar.html'")
+		div(data-ng-include="", src="'partials/sidebar.html'")
+		div(data-ng-view)
+
+		// Google Analytics: change UA-XXXXX-X to be site's ID.
+		script.
+			var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src='//www.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+
+		script(src="bower_components/jquery/jquery.min.js")
+		script(src="bower_components/select2/select2.js")
+		script(src="bower_components/angular/angular.js")
+		
+		<!-- build:js(app) scripts/modules.js -->
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/angular-ui-utils/modules/route/route.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+		<script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+		<script src="bower_components/momentjs/moment.js"></script>
+		<script src="bower_components/angular-ui-select2/src/select2.js"></script>
+		<script src="bower_components/angular-touch/angular-touch.js"></script>
+		<script src="bower_components/typeahead.js/dist/typeahead.js"></script>
+		<script src="bower_components/angular-typeahead/angular-typeahead.js"></script>
+		<script src="scripts/ngDialog.custom.js"></script>
+		<script src="scripts/jquery.sidr.min.custom.js"></script>
+		<script src="scripts/daterangepicker-custom.js"></script>
+		<!-- endbuild -->
+		
+		<!-- build:js({.tmp,app}) scripts/scripts.js -->
+		<script src="scripts/app.js"></script>
+		<script src="scripts/controllers/main.js"></script>
+		<script src="scripts/controllers/auth.js"></script>
+		<script src="scripts/services/Auth.js"></script>
+		<script src="scripts/services/Session.js"></script>
+		<script src="scripts/services/User.js"></script>
+		<script src="scripts/directives/mongooseError.js"></script>
+		<script src="scripts/directives/onFocus.js"></script>
+		<script src="scripts/directives/uniqueEmail.js"></script>
+		<script src="scripts/controllers/sidebar.js"></script>
+		<script src="scripts/controllers/navbar.js"></script>
+		<script src="scripts/directives/toggleSidebar.js"></script>
+		<script src="scripts/directives/sidebar.js"></script>
+		<script src="scripts/controllers/profile.js"></script>
+		<script src="scripts/controllers/Profile.js"></script>
+		<script src="scripts/controllers/timetracker.js"></script>
+		<script src="scripts/directives/dateRangePicker.js"></script>
+		<script src="scripts/directives/friendlyDate.js"></script>
+		<script src="scripts/services/localStorageService.js"></script>
+		<script src="scripts/services/Project.js"></script>
+		<script src="scripts/directives/friendlyTime.js"></script>
+		<script src="scripts/directives/numericInput.js"></script>
+		<script src="scripts/directives/alphanumericInput.js"></script>
+		<script src="scripts/directives/onEnter.js"></script>
+		<script src="scripts/directives/onEscape.js"></script>
+		<script src="scripts/services/Timesheet.js"></script>
+		<script src="scripts/controllers/projects.js"></script>
+		<script src="scripts/directives/timesheetComment.js"></script>
+		<script src="scripts/directives/selectAll.js"></script>
+		<script src="scripts/controllers/timesheets.js"></script>
+		<script src="scripts/services/UserTimesheet.js"></script>
+		<script src="scripts/controllers/activities.js"></script>
+		<script src="scripts/services/Activity.js"></script>
+		<script src="scripts/directives/onBlur.js"></script>
+		<script src="scripts/controllers/newAgency.js"></script>
+		<script src="scripts/services/Agency.js"></script>
+		<script src="scripts/controllers/agency.js"></script>
+		<script src="scripts/directives/timetracker.js"></script>
+		<script src="scripts/services/Notification.js"></script>
+		<script src="scripts/directives/notifications.js"></script>
+		//- <script src="scripts/services/modalService.js"></script>
+		<script src="scripts/directives/flipper.js"></script>
+		<script src="scripts/directives/onTab.js"></script>
+		<script src="scripts/filters/timesheetDate.js"></script>
+		<script src="scripts/filters/friendlyTime.js"></script>
+		<script src="scripts/controllers/editTimesheet.js"></script>
+		<!-- endbuild -->
+	//- build:body

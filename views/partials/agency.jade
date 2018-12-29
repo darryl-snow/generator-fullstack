@@ -1,0 +1,20 @@
+.container(data-ng-init="get()", on-escape="cancelSwipe()", data-ng-if="currentUser.agency", global)
+	.panel.agency.centre.aligned
+		h1(data-ng-bind="agency.name")
+		h3 Add people to your agency:
+		input.field.sfTypeahead(type="text", placeholder="someone@yourcompany.com", datasets="people", ng-model="newperson", on-enter="addperson()")
+		ul.people.left.aligned
+			li(data-ng-repeat="person in agencypeople | orderBy: 'name'", data-ng-click="toggleSwipe(person)", data-ng-swipe-left="swipeLeft(person)", data-ng-swipe-right="swipeRight(person)", data-ng-class="{'swiped':person.swiped}")
+				.five.twelfths {{person.name}}
+				.one.half {{person.email}}
+				a.floated.right.delete(data-ng-click="removeperson(person)")
+					i.cross.icon
+	button.delete.agency.button(data-ng-click="confirmdelete()") delete agency
+
+.container(data-ng-if="!currentUser.agency")
+	.panel.agency.centre.aligned
+		h1 You're not part of an agency
+		p Would you like to create one?
+		a.button(href="/agency/new", title="Create a new agency") Create new agency
+
+notifications

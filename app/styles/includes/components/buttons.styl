@@ -1,0 +1,70 @@
+// Buttons
+// 
+// Button styles
+//
+// .class - description
+//
+// Markup:
+// <button class="{$modifiers}">Button</button>
+//
+// Styleguide 2.2
+
+button
+.button
+	simple-button(dark-blue)
+	border 					none
+	cursor 					pointer
+
+	&.small
+		simple-button(dark-blue, 'small')
+
+	&.large
+		simple-button(dark-blue, 'large')
+
+	&.disabled
+		button-disabled()
+		cursor 				not-allowed
+
+	&.edit,
+	&.update,
+	&.green
+		simple-button(green)
+		color 				white
+
+	&.delete,
+	&.red
+		simple-button(red)
+		color 				white
+
+		&:active,
+		&:focus,
+		&:hover
+			color 			white
+
+	&.plain
+		@extend 			.animated.fast
+		background			none
+		border				1px solid light-grey
+		font-size			1em
+		color				grey
+		padding				0.5em
+
+		&:active,
+		&:focus,
+		&:hover
+			color 			red
+			background-color rgba(white, 0.4)
+			border-color 	lightish-grey
+
+	&.circular
+		rounded()
+
+.newproject button
+	font-size 				1em
+	padding 				0.9em
+
+.delete.agency.button
+	column(6)
+	offset(3)
+	display 				block
+	margin-top 				1em

@@ -1,0 +1,57 @@
+.container(data-ng-init="getAll()", on-escape="cancelEdit()", global)
+
+	h1 Activities
+
+	.panel
+		ul.activities
+			li.activity(data-ng-repeat="activity in activities | orderBy: 'name'", data-ng-click="toggleSwipe(activity)", data-ng-swipe-left="swipeLeft(activity)", data-ng-swipe-right="swipeRight(activity)", data-ng-class="{'swiped':activity.swiped, 'editing':activity.editing}")
+				span(data-ng-bind="activity.name")
+				a.floated.right.delete(data-ng-click="deleteactivity(activity)")
+					i.cross.icon
+				a.floated.right.edit(data-ng-click="editactivity(activity)")
+					i.pencil.icon
+
+	.newactivity#newactivity
+		form
+			input(type="text", placeholder="New Activity", data-ng-model="newactivity.name", autofocus)
+			button(data-ng-click="addactivity()", data-ng-class="{'edit':newactivity.editing}")
+				i.icon(data-ng-class="{'plus':!newactivity.editing, 'pencil':newactivity.editing}")
+
+	//- ul.activities
+	//- 	li.titles
+	//- 		.one.third(data-ng-click="predicate = 'name'; reverse=!reverse") Activity name
+	//- 			i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'name'")
+	//- 		.one.quarter(data-ng-click="predicate = 'hourlyrate'; reverse=!reverse") Hourly rate
+	//- 			i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'hourlyrate'")
+	//- 		.one.quarter(data-ng-click="predicate = 'dailyrate'; reverse=!reverse") Daily rate
+	//- 			i.icon(data-ng-class="{'arrow-down':reverse, 'arrow-up':!reverse}", data-ng-show="predicate == 'dailyrate'")
+	//- 		.one.sixth
+	//- 	li(data-ng-repeat="activity in activities | orderBy:predicate:reverse")
+	//- 		.padded.one.third
+	//- 			span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.name}}
+	//- 			input(data-ng-model="activity.name", data-ng-show="activity.editing", on-enter="update(activity)", alphanumeric-input)
+	//- 		.padded.one.quarter
+	//- 			span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.hourlyrate}}
+	//- 			input(data-ng-model="activity.hourlyrate", data-ng-show="activity.editing", on-enter="update(activity)", numeric-input)
+	//- 		.padded.one.quarter
+	//- 			span(data-ng-show="!activity.editing", data-ng-click="activity.editing = true") {{activity.dailyrate}}
+	//- 			input(data-ng-model="activity.dailyrate", data-ng-show="activity.editing", on-enter="update(activity)", numeric-input)
+	//- 		.padded.one.sixth
+	//- 			i.cross.icon.plain.circular.button(data-ng-click="delete(activity)")
+
+	//- .newactivity#newactivity
+	//- 	form
+	//- 		.one.whole
+	//- 			label(for="name") Name:
+	//- 			input#name(type="text", placeholder="New Activity", data-ng-model="newactivity.name", autofocus, alphanumeric-input)
+	//- 		.one.half
+	//- 			label(for="hourlyrate") Hourly rate:
+	//- 			input#hourlyrate(type="text", placeholder="Hourly Rate", data-ng-model="newactivity.dailyrate", numeric-input)
+	//- 		.one.half
+	//- 			label(for="dailyrate") Daily rate:
+	//- 			input#dailyrate(type="text", placeholder="Daily Rate", data-ng-model="newactivity.hourlyrate", numeric-input)
+	//- 		.centre.aligned
+	//- 			button(data-ng-click="create()")
+	//- 				i.plus.icon
+
+notifications
